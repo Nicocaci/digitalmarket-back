@@ -85,7 +85,7 @@ export const CartProvider = ({ children }) => {
 
 const clearCart = async () => {
     try {
-        await axios.delete(`${apiUrl}/api/carrito/${cartId}/productos`, {
+        await axios.delete(`${apiUrl}/carrito/${cartId}/productos`, {
             withCredentials: true,
         });
         setCart([]);
@@ -101,7 +101,7 @@ const clearCart = async () => {
     const removeProductFromCart = async (productId, quantity = 1) => {
         try {
             await axios.delete(
-                `${apiUrl}/api/carrito/${cartId}/productos/${productId}`,
+                `${apiUrl}/carrito/${cartId}/productos/${productId}`,
                 {
                     data: { quantity },
                     withCredentials: true,
