@@ -1,45 +1,44 @@
-.navBar-container{
+.navBar-container {
     background-color: black;
     height: 15vh;
-    
+
 }
 
-.navBar{
+.navBar {
     display: flex;
     justify-content: space-between;
     padding-top: 2%;
     align-items: center;
-    
+
 }
 
-.navBar-title{
+.navBar-title {
     color: white;
     text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
-.logo{
+.logo {
     height: 10vh;
     border-radius: 10%;
 }
 
-.navBar-list{
+.navBar-list {
     display: flex;
     list-style: none;
     gap: 30px;
 }
 
-.login-button{
+.login-button {
     color: black;
 }
 
-.register-button{
+.register-button {
     color: black;
 }
 
-.logo-cart{
+.logo-cart {}
 
-}
-
-.logout-button{
-
-}
+.logout-button {}

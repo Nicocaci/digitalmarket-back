@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 
 const CartItem = ({ item, removeProductFromCart }) => {
     
@@ -9,7 +11,7 @@ const CartItem = ({ item, removeProductFromCart }) => {
     };
     return (
         <li key={item._id} className="cart-item">
-            <img src={`https://digitalmarket2-back-production.up.railway.app/uploads/${item.product.imagen}`} alt={item.product?.nombre} />
+            <img src={`${apiUrlUD}/uploads/${item.product.imagen}`} alt={item.product?.nombre} />
             <div className="details">
                 <h4>{item.product?.nombre}</h4>
                 <p>Cantidad: {item.quantity}</p>

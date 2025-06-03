@@ -6,7 +6,7 @@ import CartDropdown from './CartDropdown';
 import { useState } from 'react';
 import AuthModal from '../utils/AuthModal';
 import axios from 'axios';
-
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
@@ -23,7 +23,7 @@ const NavBar = () => {
   };
   const handleLogout = async () => {
     try {
-      await axios.post('https://digitalmarket2-back-production.up.railway.app/api/usuario/logout', {}, { withCredentials: true });
+      await axios.post(`${apiUrl}/usuario/logout`, {}, { withCredentials: true });
       localStorage.removeItem('token'); // Limpiar token local
       // Opcional: recargar o redirigir a inicio después del logout
       window.location.href = '/';
@@ -59,7 +59,7 @@ const NavBar = () => {
           <CartDropdown visible={showCart} onClose={() => setShowCart(false)} />
         </div>
         <div className='logout-button'>
-          <button onClick={handleLogout}>Cerrar Sesion</button>
+          <button className='navBar-title login-button' onClick={handleLogout}>Cerrar Sesion</button>
         </div>
       </nav>
 

@@ -2,7 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import '../../../css/Perfil/PerfilAdmin.css'
+import '../../../css/Perfil/PerfilAdmin.css';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const CrearProducto = () => {
     const [formData, setFormData] = useState({
@@ -51,7 +52,7 @@ const CrearProducto = () => {
 
 
                 try {
-                    await axios.post("https://digitalmarket2-back-production.up.railway.app/api/productos",
+                    await axios.post(`${apiUrl}/productos`,
                         formDataToSend,
                         { headers: { "Content-type": "multipart/form-data" } }
                     );

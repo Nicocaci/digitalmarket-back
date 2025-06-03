@@ -10,7 +10,7 @@ const ComoComprar = () => {
       <section className='section'>
       <div className='ComoComprar'>
         <div className='ComoComprarCards'>
-          <h2 className='tituloComprar1'>Create un usuario e Inicia sesion</h2>
+          <h2 className='tituloComprar1'>Registrate e Inicia sesion</h2>
           <li className='textoComprar'>Create una cuenta y luego Inicia sesión para poder empezar a comprar.</li>
           <li className='textoComprar'>Al crear una cuenta, se crea tu propoio carrito para poder llevar el control de tus compras.</li>
         </div>

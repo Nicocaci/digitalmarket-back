@@ -10,6 +10,7 @@ import { CartProvider } from "./context/CartContext.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CheckOut from "./components/CheckOut.jsx";
+import Gracias from "./components/Gracias.jsx";
 
 
 
@@ -28,6 +29,7 @@ function App() {
             <Route exact path="/perfil" element={<Perfil />} />
             <Route exact path="/nosotros" element={<Nosotros />} />
             <Route exact path="/checkOut" element={<CheckOut />} />
+            <Route path="/gracias" element={<Gracias />} />
           </Routes>
         </BrowserRouter>
         <ToastContainer position="bottom-right" autoClose={3000} />

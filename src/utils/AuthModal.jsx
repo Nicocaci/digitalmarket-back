@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/AuthModal.css';
 import axios from 'axios';
 import { useCart } from '../context/CartContext';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 
 const AuthModal = ({ isOpen, onClose, type }) => {
@@ -23,7 +24,7 @@ const AuthModal = ({ isOpen, onClose, type }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const endpoint = type === 'login' ? 'http://localhost:3000/api/usuario/login' : 'http://localhost:3000/api/usuario/registro';
+        const endpoint = type === 'login' ? `${apiUrl}/usuario/login` : `${apiUrl}/usuario/registro`;
 
         const payload =
             type === 'login'

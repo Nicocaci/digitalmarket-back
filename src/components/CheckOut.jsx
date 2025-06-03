@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import '../css/Checkout.css';
+import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const CheckOut = () => {
     const { cart, total, clearCart } = useCart();
@@ -21,25 +23,35 @@ const CheckOut = () => {
             [name]: value
         }));
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (cart.length === 0) {
             alert('Tu carrito está vacío.');
             return;
         }
+        try {
+            const response = await axios.post(`${apiUrl}/orders/crear-orden`, {
+                nombre: formData.nombre,
+                email: formData.email,
+                direccion: formData.direccion,
+                productos: cart.map(item => ({
+                    productId: item._id || item.product._id,
+                    nombre: item.product.nombre,
+                    precio: item.product.precio,
+                    quantity: item.quantity
+                })),
+                total
+            });
 
-        // Podés enviar estos datos a un backend en el futuro
-        console.log('Compra confirmada:\n', JSON.stringify({
-            datosComprador: formData,
-            productos: cart,
-            total
-        }, null, 2));
-
-        alert(`¡Gracias por tu compra, ${formData.nombre}!`);
-        clearCart();
-        navigate('/'); // redirige al inicio o donde prefieras
-    };
+            alert(`¡Gracias por tu compra, ${formData.nombre}!`);
+            clearCart();
+            navigate('/gracias', { state: { orden: response.data.orden } });
+        } catch (error) {
+            console.error('Error en el checkout:', error);
+            alert('Ocurrió un error al procesar tu compra. Intentalo más tarde.');
+        }
+    }
 
     return (
         <div className="checkout-container">
