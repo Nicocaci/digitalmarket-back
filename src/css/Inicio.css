@@ -1,0 +1,130 @@
+.inicio {
+    margin-top: 5%;
+    background-color: #8e9695;
+    width: 100%;
+
+    border: 2px solid black;
+
+}
+
+.container2 {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 90%;
+    border-radius: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+.filter {
+    background-color: #e4e4e7;
+    width: 100%;
+    border-radius: 10px;
+    gap: 20px;
+    padding: 2%;
+    font-size: 1rem;
+    margin-top: 5%;
+
+}
+
+.filter2 {
+    display: flex;
+    gap: 15%;
+    padding: 15px;
+    border-radius: 10%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+select {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-left: 20%;
+    height: 50vh;
+}
+
+.card img {
+    width: 100%;
+    height: 30vh;
+    border-bottom: 1px solid #eee;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-content h1 {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.card-content p {
+    font-size: 1rem;
+    color: #777;
+    margin: 5px 0;
+}
+
+.card-content .price {
+    font-size: 1.4rem;
+    color: #2a9d8f;
+    margin: 5px 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.card-content .stock {
+    font-size: 1.4rem;
+    color: #2a9d8f;
+    margin: 5px 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.card-content button {
+    background-color: #A3E635;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 30px;
+    height: 30px;
+}
+
+
+.card-content button:hover {
+    background-color: #21867a;
+}
+
+.contenido-inicio1 {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 5%;
+}

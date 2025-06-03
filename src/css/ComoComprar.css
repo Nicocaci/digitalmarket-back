@@ -1,0 +1,60 @@
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.ComoComprar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 50%;
+}
+
+.ComoComprarCards {
+    border: 1px, solid, gray;
+    padding: 30px;
+}
+
+.textoComprar {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.tituloComprar1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #818cf8;
+}
+
+.tituloComprar2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #A3E635;
+}
+
+.tituloComprar3 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #FFAC15;
+}
+
+.tituloComprar4 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #22D3EE;
+}
+
+.tituloComprar {
+    margin-top: 2%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+
+}

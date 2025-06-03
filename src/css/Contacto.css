@@ -1,0 +1,52 @@
+.contactoData {
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 2%;
+}
+
+.wpp {
+    gap: 10px;
+}
+
+.text-contacto {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.titulo-contacto {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+    margin-top: 2%;
+    font-size: xx-large;
+}
+
+.formulario-contacto {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.formulario-contacto input,
+.formulario-contacto textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formulario-contacto button {
+    background-color: #2b7a78;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.formulario-contacto button:hover {
+    background-color: #3aafa9;
+}

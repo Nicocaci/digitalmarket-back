@@ -1,0 +1,119 @@
+/* CartDropdown.css */
+.cart-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 320px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 16px;
+    display: none;
+    z-index: 100;
+}
+
+.cart-total {
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.remove-btn {
+    margin-top: 5px;
+    padding: 4px 8px;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background-color: #e60000;
+}
+
+.cart-dropdown.visible {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.details h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.details p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+}
+
+.checkout-btn-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.checkout-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: #0056b3;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

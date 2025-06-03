@@ -1,0 +1,45 @@
+.navBar-container{
+    background-color: black;
+    height: 15vh;
+    
+}
+
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 2%;
+    align-items: center;
+    
+}
+
+.navBar-title{
+    color: white;
+    text-decoration: none;
+}
+
+.logo{
+    height: 10vh;
+    border-radius: 10%;
+}
+
+.navBar-list{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.login-button{
+    color: black;
+}
+
+.register-button{
+    color: black;
+}
+
+.logo-cart{
+
+}
+
+.logout-button{
+
+}
