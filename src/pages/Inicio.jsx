@@ -24,7 +24,7 @@ const Inicio = () => {
 
     const fetchProductos = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/api/productos");
+            const response = await axios.get("https://digitalmarket2-back-production.up.railway.app//api/productos");
             if (Array.isArray(response.data)) {
                 setProductos(response.data);
             } else {
@@ -114,7 +114,7 @@ const Inicio = () => {
                     {filtrarProductos().length > 0 ? (
                         filtrarProductos().map((prod) => (
                             <div key={prod._id} className="card">
-                                <img src={`http://localhost:3000/uploads/${prod.imagen}`} alt={prod.nombre} />
+                                <img src={`https://digitalmarket2-back-production.up.railway.app/uploads/${prod.imagen}`} alt={prod.nombre} />
                                 <div className="card-content">
                                     <h1>{prod.nombre}</h1>
                                     <h2 className="price">$ {(prod.precio * 1.305).toFixed(2)}</h2>

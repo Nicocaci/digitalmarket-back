@@ -83,7 +83,7 @@ export const CartProvider = ({ children }) => {
 
 const clearCart = async () => {
     try {
-        await axios.delete(`http://localhost:3000/api/carrito/${cartId}/productos`, {
+        await axios.delete(`https://digitalmarket2-back-production.up.railway.app/api/carrito/${cartId}/productos`, {
             withCredentials: true,
         });
         setCart([]);
@@ -99,14 +99,14 @@ const clearCart = async () => {
     const removeProductFromCart = async (productId, quantity = 1) => {
         try {
             await axios.delete(
-                `http://localhost:3000/api/carrito/${cartId}/productos/${productId}`,
+                `https://digitalmarket2-back-production.up.railway.app/api/carrito/${cartId}/productos/${productId}`,
                 {
                     data: { quantity },
                     withCredentials: true,
                 }
             );
 
-            const response = await axios.get(`http://localhost:3000/api/carrito/${cartId}`, {
+            const response = await axios.get(`https://digitalmarket2-back-production.up.railway.apsp/api/carrito/${cartId}`, {
                 withCredentials: true,
             });
             setCart(response.data.products);

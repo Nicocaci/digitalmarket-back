@@ -51,7 +51,7 @@ const CrearProducto = () => {
 
 
                 try {
-                    await axios.post("http://localhost:3000/api/productos",
+                    await axios.post("https://digitalmarket2-back-production.up.railway.app/api/productos",
                         formDataToSend,
                         { headers: { "Content-type": "multipart/form-data" } }
                     );

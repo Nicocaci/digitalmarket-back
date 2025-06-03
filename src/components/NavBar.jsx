@@ -23,7 +23,7 @@ const NavBar = () => {
   };
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:3000/api/usuario/logout', {}, { withCredentials: true });
+      await axios.post('https://digitalmarket2-back-production.up.railway.app/api/usuario/logout', {}, { withCredentials: true });
       localStorage.removeItem('token'); // Limpiar token local
       // Opcional: recargar o redirigir a inicio después del logout
       window.location.href = '/';

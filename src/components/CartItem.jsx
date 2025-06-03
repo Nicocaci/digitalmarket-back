@@ -9,7 +9,7 @@ const CartItem = ({ item, removeProductFromCart }) => {
     };
     return (
         <li key={item._id} className="cart-item">
-            <img src={`http://localhost:3000/uploads/${item.product.imagen}`} alt={item.product?.nombre} />
+            <img src={`https://digitalmarket2-back-production.up.railway.app/uploads/${item.product.imagen}`} alt={item.product?.nombre} />
             <div className="details">
                 <h4>{item.product?.nombre}</h4>
                 <p>Cantidad: {item.quantity}</p>
