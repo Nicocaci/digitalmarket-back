@@ -24,7 +24,7 @@ const Inicio = () => {
 
     const fetchProductos = async () => {
         try {
-            const response = await axios.get("https://digitalmarket2-back-production.up.railway.app//api/productos");
+            const response = await axios.get("https://digitalmarket2-back-production.up.railway.app/api/productos");
             if (Array.isArray(response.data)) {
                 setProductos(response.data);
             } else {
