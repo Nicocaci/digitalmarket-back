@@ -16,18 +16,19 @@ export const CartProvider = ({ children }) => {
 
     // Obtener token y extraer cartId al iniciar
     useEffect(() => {
-        const token = Cookies.get('access_token');
-        if (token) {
+        const fetchCart = async () => {
             try {
-                const decoded = jwtDecode(token);
-                console.log("Token decodificado:", decoded);
-                setCartId(decoded.cart);
-            } catch (err) {
-                console.error("Error al decodificar el token:", err);
+                const response = await axios.get(`${apiUrl}/carrito/mi-carrito`, {
+                    withCredentials: true,
+                });
+                console.log("Carrito cargado:", response.data);
+                setCart(response.data.products);
+            } catch (error) {
+                console.error("Error al cargar carrito:", error);
             }
-        } else {
-            console.warn("No se encontró el token en cookies.");
-        }
+        };
+
+        fetchCart();
     }, []);
 
 
@@ -83,18 +84,18 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-const clearCart = async () => {
-    try {
-        await axios.delete(`${apiUrl}/api/carrito/${cartId}/productos`, {
-            withCredentials: true,
-        });
-        setCart([]);
-        toast.success("Carrito vaciado correctamente");
-    } catch (error) {
-        console.error("Error al vaciar carrito:", error);
-        toast.error("Error al vaciar carrito");
-    }
-};
+    const clearCart = async () => {
+        try {
+            await axios.delete(`${apiUrl}/api/carrito/${cartId}/productos`, {
+                withCredentials: true,
+            });
+            setCart([]);
+            toast.success("Carrito vaciado correctamente");
+        } catch (error) {
+            console.error("Error al vaciar carrito:", error);
+            toast.error("Error al vaciar carrito");
+        }
+    };
 
 
 
