@@ -108,7 +108,7 @@ const clearCart = async () => {
                 }
             );
 
-            const response = await axios.get(`${apiUrl}/api/carrito/${cartId}`, {
+            const response = await axios.get(`${apiUrl}/carrito/${cartId}`, {
                 withCredentials: true,
             });
             setCart(response.data.products);

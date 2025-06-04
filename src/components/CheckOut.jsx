@@ -43,10 +43,19 @@ const CheckOut = () => {
                 })),
                 total
             });
+            // 2. Crear preferencia en Mercado Pago
+            const mercadoPagoResponse = await axios.post(`${apiUrl}/mercado-pago/crear-orden`, {
+                productos: cart.map(item => ({
+                    nombre: item.product.nombre,
+                    precio: item.product.precio,
+                    quantity: item.quantity
+                })),
+                nombre: formData.nombre,
+                email: formData.email
+            });
 
-            alert(`¡Gracias por tu compra, ${formData.nombre}!`);
-            clearCart();
-            navigate('/gracias', { state: { orden: response.data.orden } });
+            // 3. Redirigir al checkout de Mercado Pago
+            window.location.href = mercadoPagoResponse.data.init_point;
         } catch (error) {
             console.error('Error en el checkout:', error);
             alert('Ocurrió un error al procesar tu compra. Intentalo más tarde.');
