@@ -7,7 +7,7 @@ const ComoComprar = () => {
       <div className='center tituloComprar'>
       <h1>Como Comprar?...</h1>
       </div>
-      <section className='section'>
+      <section className='sectionComprar'>
       <div className='ComoComprar'>
         <div className='ComoComprarCards'>
           <h2 className='tituloComprar1'>Registrate e Inicia sesion</h2>

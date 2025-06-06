@@ -30,13 +30,16 @@ const BannerSlider = () => {
     }, []);
 
     return (
-        <div className="hero-banner">
-            <img
-                src={images[current]}
-                alt="Banner"
-                className={`banner-image ${fade ? 'fade-in' : 'fade-out'}`}
-            />
-        </div>
+<div className="hero-banner">
+  <div className="banner-overlay">
+    Bienvenidos a DIGITALMARKET
+  </div>
+  <img
+    src={images[current]}
+    alt="Banner"
+    className={`banner-image ${fade ? 'fade-in' : 'fade-out'}`}
+  />
+</div>
     );
 };
 

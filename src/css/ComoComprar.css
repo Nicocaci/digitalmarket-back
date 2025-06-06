@@ -1,8 +1,8 @@
-.section {
+.sectionComprar {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2%;
+    margin-top: 10%;
 }
 
 .ComoComprar {
@@ -57,4 +57,10 @@
     font-weight: 500;
     font-style: normal;
 
+}
+
+@media (max-width: 575px) {
+    .sectionComprar{
+    margin-top: 30%;
+}
 }

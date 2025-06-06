@@ -76,45 +76,33 @@ const Inicio = () => {
             <h1 className='title'>Lista de Productos
             </h1>
 
-            <div className='filter'>
-                <div className='filter2'>
-                    <label className='text-filter'>
-                        <input
-                            type="checkbox"
-                            value="salames"
-                            onChange={handleCategoryChange}
-
-                        /> Salames
-                    </label>
-                    <label className='text-filter'>
-                        <input
-                            type="checkbox"
-                            value="jamon"
-                            onChange={handleCategoryChange}
-                        /> Jamón
-                    </label>
-                    <label className='text-filter'>
-                        <input
-                            type="checkbox"
-                            value="mortadela"
-                            onChange={handleCategoryChange}
-                        /> Mortadela
-                    </label>
-                    <label className='text-filter'>
-                        <input type="checkbox"
-                            value="jamon-cocido"
-                            onChange={handleCategoryChange}
-                        /> Jamón Cocido
-                    </label>
-                    <label className='text-filter'>
-                        <input
-                            type="checkbox"
-                            value="jamon-crudo"
-                            onChange={handleCategoryChange}
-                        /> Jamón Crudo
-                    </label>
+            <section className="filter1">
+                <div className="filter2">
+                    {[
+                        { value: "salames", label: "Salames" },
+                        { value: "jamon", label: "Jamón" },
+                        { value: "mortadela", label: "Mortadela" },
+                        { value: "jamon-cocido", label: "Jamón Cocido" },
+                        { value: "jamon-crudo", label: "Jamón Crudo" },
+                    ].map((cat) => (
+                        <label
+                            key={cat.value}
+                            className={`filter-option ${categoriasSeleccionadas.includes(cat.value) ? "active" : ""
+                                }`}
+                        >
+                            <input
+                                type="checkbox"
+                                value={cat.value}
+                                onChange={handleCategoryChange}
+                                checked={categoriasSeleccionadas.includes(cat.value)}
+                                className="checkbox-hidden"
+                            />
+                            {cat.label}
+                        </label>
+                    ))}
                 </div>
-            </div>
+            </section>
+
 
             <div className='container2'>
                 <div className="container">

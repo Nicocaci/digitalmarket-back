@@ -1,3 +1,7 @@
+.seccion-contacto{
+    margin-top: 10%;
+}
+
 .contactoData {
     flex-direction: column;
     gap: 20px;
@@ -49,4 +53,10 @@
 
 .formulario-contacto button:hover {
     background-color: #3aafa9;
+}
+
+@media (max-width: 575px) {
+    .seccion-contacto{
+    margin-top: 30%;
+}
 }

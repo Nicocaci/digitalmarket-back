@@ -1,5 +1,5 @@
 .crearProducto {
-    width: 80%;
+    width: 70%;
     margin-left: 5%;
     padding: 20px;
     background: #ffffff;
@@ -17,4 +17,5 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+    margin-top:10%;
 }
