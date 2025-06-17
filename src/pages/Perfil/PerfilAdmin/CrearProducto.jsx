@@ -86,7 +86,7 @@ const CrearProducto = () => {
 
     return (
         <form onSubmit={handleSubmit} className='crearProducto'>
-            <h2>Crear Producto</h2>
+            <h2 className='center'>Crear Producto</h2>
             <div className='grid-productos'>
             <input
                 type="text"

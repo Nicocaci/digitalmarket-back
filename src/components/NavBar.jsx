@@ -99,7 +99,7 @@ const NavBar = () => {
         </div>
 
         <div className='logo-div'>
-          <LogoAnimado />
+          <a href="/"><LogoAnimado /></a>
         </div>
         
         

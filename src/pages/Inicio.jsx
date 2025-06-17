@@ -16,7 +16,7 @@ const Inicio = () => {
                 <BannerSlider />
                 <div className="hero-text">Excelencia Miguez</div>
             </div>
-            <h1 className="title">Productos en Descuento</h1>
+            <h1 className="title">Productos Destacados</h1>
             <ProductoDestacado />
         </section>
     )

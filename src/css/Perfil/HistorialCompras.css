@@ -5,7 +5,6 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    margin-right: 5%;
 }
 
 .historial-titulo {
@@ -67,4 +66,15 @@
 
 .btn-detalle:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 575px) {
+    .historial-container{
+        width: 100%;
+    }
+
+    .tabla-compras{
+        font-size: 8px;
+        margin-left: -25px;
+    }
 }

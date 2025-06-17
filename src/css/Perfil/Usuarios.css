@@ -6,5 +6,10 @@
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    margin-right: 5%;
+}
+
+@media (max-width: 575px) {
+    .seccion-usuarios {
+        width: 100%;
+    }
 }

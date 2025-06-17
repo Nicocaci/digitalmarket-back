@@ -11,8 +11,8 @@ const PerfilAdmin = () => {
 
 
   return (
-    <div>
-      PerfilAdmin
+    <div className=''>
+      <h1 className='titulo-user center'>Perfil Admin</h1>
       <div className='seccion-admin'>
         <CrearProducto />
         <HistorialCompras />
