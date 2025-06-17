@@ -5,56 +5,58 @@ import { useState, useEffect } from 'react';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const Usuarios = () => {
-    const [usuarios, setUsuarios] =  useState([]);
-    useEffect(() => {
-        fetchUsuarios();
-    }, []);
+  const [usuarios, setUsuarios] = useState([]);
+  useEffect(() => {
+    fetchUsuarios();
+  }, []);
 
-    const fetchUsuarios = async () => {
-        try {
-          const response = await axios.get(`${apiUrl}/usuario`)
-            if (Array.isArray(response.data)) {
-                setUsuarios(response.data);
-            } else {
-                console.error("La API no devolvió un array", response.data);
-                setUsuarios([]);
-            }
-        } catch (error) {
-          console.error("Error al obtener los usuarios", error);
-        }
+  const fetchUsuarios = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/usuario`)
+      if (Array.isArray(response.data)) {
+        setUsuarios(response.data);
+      } else {
+        console.error("La API no devolvió un array", response.data);
+        setUsuarios([]);
+      }
+    } catch (error) {
+      console.error("Error al obtener los usuarios", error);
     }
-    
+  }
+
   return (
     <div className='seccion-usuarios'>
-        <div><h1>Listado de Clientes</h1></div>
-        <div>
-          <table className='tabla-compras'> 
-            <thead>
+      <div><h1>Listado de Clientes</h1></div>
+      <div>
+        <table className='tabla-compras'>
+          <thead>
+            <tr>
               <th>#</th>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Dni</th>
               <th>Direccion</th>
               <th>Email</th>
-              <th>rol</th>
+              <th>Rol</th>
               <th>Carrito</th>
-            </thead>
-            <tbody>
-              {usuarios.map((u, index)=> (
-                <tr key={u._id}>
-                  <td>{index + 1}</td>
-                  <td>{u.nombre}</td>
-                  <td>{u.apellido}</td>
-                  <td>{u.dni}</td>
-                  <td>{u.direccion}</td>
-                  <td>{u.email}</td>
-                  <td>{u.role}</td>
-                  <td>{u.cart}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {usuarios.map((u, index) => (
+              <tr key={u._id}>
+                <td>{index + 1}</td>
+                <td>{u.nombre}</td>
+                <td>{u.apellido}</td>
+                <td>{u.dni}</td>
+                <td>{u.direccion}</td>
+                <td>{u.email}</td>
+                <td>{u.role}</td>
+                <td>{u.cart}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

@@ -4,7 +4,8 @@ import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import '../css/BannerSlider.css'
+import '../css/BannerSlider.css';
+import LogoAnimado from "./LogoAnimado.jsx";
 
 
 const BannerSlider = () => {
@@ -32,7 +33,6 @@ const BannerSlider = () => {
     return (
 <div className="hero-banner">
   <div className="banner-overlay">
-    Bienvenidos a DIGITALMARKET
   </div>
   <img
     src={images[current]}

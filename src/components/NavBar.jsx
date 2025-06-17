@@ -1,19 +1,55 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../css/NavBar.css';
-import logo from '/logoOpcion1.svg';
+import logo from '/logoOpcion3.svg';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 import CartDropdown from './CartDropdown';
 import AuthModal from '../utils/AuthModal';
 import axios from 'axios';
 const apiUrl = import.meta.env.VITE_API_URL;
+import LogoAnimado from '../utils/LogoAnimado';
 
 const NavBar = () => {
   const [showCart, setShowCart] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authType, setAuthType] = useState('login');
+  const [userId, setUserId] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // NUEVO
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
+
+
+  useEffect(() => {
+    const token = Cookies.get('access_token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        console.log("Token decodificado:", decoded);
+        setUserId(decoded._id);
+      } catch (err) {
+        console.error("Error al decodificar el token:", err);
+      }
+    } else {
+      console.warn("No se encontró el token en cookies.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
+      fetchUsuario();
+    }
+  }, [userId]);
+
+  const fetchUsuario = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/usuario/${userId}`);
+      setUserData(response.data); // .data, no todo el response
+    } catch (error) {
+      console.error("Error al obtener el usuario", error);
+    }
+  };
 
   const toggleCart = () => setShowCart(prev => !prev);
   const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev); // NUEVO
@@ -57,32 +93,39 @@ const NavBar = () => {
   return (
     <div className='navBar-container'>
       <nav className='navBar'>
-        <div className='logo'>
-          <img className='logo' src={logo} alt="logo-migues" />
+        <div className='logo-cart-container'>
+          <button className='cart-button' onClick={toggleCart}>🛒</button>
+          <CartDropdown visible={showCart} onClose={() => setShowCart(false)} />
         </div>
 
-
+        <div className='logo-div'>
+          <LogoAnimado />
+        </div>
+        
+        
         <button ref={buttonRef} className="hamburger" onClick={toggleMobileMenu}>
           ☰
         </button>
-
-
+        
+        
         <ul ref={menuRef} className={`navBar-list ${mobileMenuOpen ? 'open' : ''}`}>
           <li><Link className='navBar-title' to="/" onClick={() => setMobileMenuOpen(false)}>Inicio</Link></li>
+          <li><Link className='navBar-title' to="/productos" onClick={() => setMobileMenuOpen(false)}>Productos</Link></li>
           <li><Link className='navBar-title' to="/contacto" onClick={() => setMobileMenuOpen(false)}>Contacto</Link></li>
-          <li><Link className='navBar-title' to="/comocomprar" onClick={() => setMobileMenuOpen(false)}>Como Comprar</Link></li>
-          <li><Link className='navBar-title' to="/nosotros" onClick={() => setMobileMenuOpen(false)}>Nosotros</Link></li>
+          <li><Link className='navBar-title' to="/faq" onClick={() => setMobileMenuOpen(false)}>FAQ</Link></li>
           <li><Link className='navBar-title' to="/perfil" onClick={() => setMobileMenuOpen(false)}>Perfil</Link></li>
-          <li><button className='navBar-title login-button' onClick={() => openAuthModal('login')}>Iniciar Sesión</button></li>
-          <li><button className='navBar-title login-button' onClick={() => openAuthModal('register')}>Registrarse</button></li>
-          <li><button className='navBar-title login-button' onClick={handleLogout}>Cerrar Sesión</button></li>
-          <div className='logo-cart-container'>
-            <button className='cart-button' onClick={toggleCart}>🛒</button>
-            <CartDropdown visible={showCart} onClose={() => setShowCart(false)} />
-          </div>
+          {userData ? (
+            <>
+              <li className='navBar-title saludo-usuario'>Bienvenido, {userData.nombre}</li>
+              <li><button className='navBar-title login-button' onClick={handleLogout}>Cerrar Sesión</button></li>
+            </>
+          ) : (
+            <>
+              <li><button className='navBar-title login-button' onClick={() => openAuthModal('login')}>Iniciar Sesión</button></li>
+              <li><button className='navBar-title login-button' onClick={() => openAuthModal('register')}>Registrarse</button></li>
+            </>
+          )}
         </ul>
-
-
       </nav>
 
       <AuthModal

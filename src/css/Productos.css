@@ -1,0 +1,95 @@
+
+.titutlo-productos {
+    color: black;
+    margin-top: 10%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+.container-productos{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    justify-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.precio{
+    color: rgb(3, 121, 38);
+}
+
+.card-link{
+    width: 100%;
+    text-decoration: none;
+}
+
+
+.filtro-busqueda {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    background-color: #f9f9f9;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin: 2rem auto;
+    width: 80%;
+}
+.filtro-busqueda select {
+    background-color: #fff; /* cambia el fondo visible del select cerrado */
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    appearance: none; /* oculta la flechita default en algunos navegadores */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+}
+
+.filtro-busqueda input{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.filtro-busqueda input {
+    width: 60%;
+    max-width: 400px;
+}
+
+.filtros-fondo{
+        backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.logo-categoria{
+    color: black;
+}
+
+
+@media (max-width: 575px) {
+.container-productos{
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0%;
+    width: 100%;
+}
+.filtro-busqueda{
+    width: 100%;
+    flex-wrap: nowrap;
+    gap:0;
+}
+.page-productos{
+    margin-top: 40%;
+}
+
+
+}
+

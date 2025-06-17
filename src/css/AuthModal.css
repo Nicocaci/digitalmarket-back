@@ -67,3 +67,20 @@
 .submit-btn:hover {
   background-color: #005fa3;
 }
+
+/* AuthModal.css */
+.link-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-footer {
+  margin-top: 1rem;
+  text-align: center;
+}

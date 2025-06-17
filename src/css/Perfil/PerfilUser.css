@@ -1,0 +1,100 @@
+.titulo-user{
+    color: black;
+    margin-top: 10%;
+}
+
+.seccion-form{
+    width: 60%;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.navbar-usuario{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.link-usuario{
+    list-style: none;
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.link-usuario.activo {
+  background-color: #fff; /* o el gris que vos quieras */
+}
+
+.titulo-navBar{
+    text-decoration: none;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+.form-usuario{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    justify-items: start;
+    background: #fff;
+    gap: 10px;
+    padding: 20px;
+}
+
+.titulo-tabla-usuario {
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.form-usuario label {
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.form-usuario input {
+    width: 100%;
+    border-radius: 100px;
+    padding: 10px 25px;
+    font-size: 18px;
+}
+
+
+.btn-usuario{
+    background: #007b7f;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 2%;
+    height: 40px;
+    border-radius: 6px;
+    width: 60%;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border: none;
+}
+
+@media (max-width: 575px) {
+    .titulo-user{
+    margin-top: 40%;
+    }
+    .seccion-form{
+        width: 98%;
+    }
+    .tabla-pedidos{
+        font-size: 13px;
+        margin-left: -20px;
+    }
+
+
+}

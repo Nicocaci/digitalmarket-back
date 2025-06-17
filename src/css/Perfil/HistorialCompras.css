@@ -23,6 +23,9 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
 .tabla-compras th {

@@ -87,9 +87,11 @@ const CrearProducto = () => {
     return (
         <form onSubmit={handleSubmit} className='crearProducto'>
             <h2>Crear Producto</h2>
+            <div className='grid-productos'>
             <input
                 type="text"
                 name='nombre'
+                className='input-crear'
                 placeholder='Nombre del producto'
                 value={formData.nombre}
                 onChange={handleChange}
@@ -98,6 +100,7 @@ const CrearProducto = () => {
             <input
                 type="text"
                 name='categoria'
+                className='input-crear'
                 placeholder='Categoria del producto'
                 value={formData.categoria}
                 onChange={handleChange}
@@ -106,28 +109,36 @@ const CrearProducto = () => {
             <input
                 type="file"
                 name="imagen"
+                className='input-upload'
                 accept="image/*"
                 multiple
                 onChange={handleImageChange}
                 required
             />
+            </div>
+            <div className='grid-productos'>
             <input
                 type="number"
                 name="precio"
+                className='input-crear'
                 placeholder='Precio $$'
                 value={formData.precio}
                 onChange={handleChange} />
             <input
                 type="number"
                 name='stock'
+                className='input-crear'
                 placeholder='Stock'
                 value={formData.stock}
                 onChange={handleChange}
                 required />
+            </div>
 
-            <button type="submit" className="btnCrear">
+            <div className='btn-flex'>
+            <button type="submit" className="btn-crear">
                 Crear Producto
             </button>
+            </div>
         </form>
     )
 }

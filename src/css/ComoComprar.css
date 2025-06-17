@@ -1,26 +1,53 @@
-.sectionComprar {
+
+.seccion-faq{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin-top: 10%;
 }
+
+.seccion-envio{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+    width: 50%;
+    margin: auto;
+    margin-top: 2%;
+}
+
+.seccion-envio2{
+    border: 1px, solid, gray;
+    padding: 30px;
+    border-radius: 10px;
+    background: #ffff;
+}
+
 
 .ComoComprar {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     width: 50%;
+    margin: auto;
+    margin-top: 2%;
 }
 
 .ComoComprarCards {
     border: 1px, solid, gray;
     padding: 30px;
+    border-radius: 10px;
+    background: #ffff;
 }
 
-.textoComprar {
+.textofaq {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
+}
+
+.titulo-faq{
+    margin-top: 2%;
 }
 
 .tituloComprar1 {
@@ -60,7 +87,14 @@
 }
 
 @media (max-width: 575px) {
-    .sectionComprar{
-    margin-top: 30%;
+    .seccion-faq{
+    margin-top: 40%;
 }
+    .ComoComprar{
+        grid-template-columns: repeat(1, 1fr);
+        width: 90%;
+    }
+    .seccion-envio{
+        width: 90%;
+    }
 }

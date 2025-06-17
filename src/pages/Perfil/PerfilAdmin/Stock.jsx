@@ -59,7 +59,7 @@ const Stock = () => {
     return (
         <div className='seccion-productos'>
             <div><h1>Productos a la Venta</h1></div>
-            <div className="">
+            <div className="tabla-productos">
                 <table className='tabla-compras'>
                     <thead>
                         <tr>

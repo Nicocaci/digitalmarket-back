@@ -9,6 +9,12 @@
     font-family: 'Arial', sans-serif;
 }
 
+.tabla-productos{
+    height: 500px;
+    overflow: auto;
+}
+
+
 .listado-productos{
     display: grid;
     grid-template-columns: repeat(3, 1fr);

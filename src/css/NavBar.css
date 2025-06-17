@@ -17,6 +17,14 @@
 
 }
 
+
+.saludo-usuario {
+    font-weight: bold;
+    color: white;
+    /* o el color que combine con tu fondo */
+    margin-right: 10px;
+}
+
 .navBar-title {
     color: white;
     text-decoration: none;
@@ -25,8 +33,14 @@
     font-style: normal;
 }
 
+
 .logo {
     height: 10vh;
+    border-radius: 10%;
+}
+
+.logo-animado {
+    height: 100px;
     border-radius: 10%;
 }
 
@@ -79,6 +93,7 @@
         z-index: 1000;
         /* para que esté por delante */
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        margin-top: 10%;
     }
 
     .navBar-title {
@@ -91,10 +106,13 @@
 
     .hamburger {
         display: block;
-        position: absolute;
         top: 20px;
         right: 20px;
         z-index: 1100;
         /* aún más arriba */
+    }
+
+    .logo-animado {
+        height: 80px;
     }
 }
