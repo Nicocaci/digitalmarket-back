@@ -13,6 +13,7 @@ import Gracias from "./components/Gracias.jsx";
 import Productos from "./pages/Productos.jsx";
 import Pedidos from "./pages/Perfil/PerfilUser/Pedidos.jsx";
 import ItemDetail from "./components/ItemDetail.jsx";
+import Footer from "./components/Footer.jsx";
 
 
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/gracias" element={<Gracias />} />
             <Route path="/productos/:id" element={<ItemDetail/>} />
           </Routes>
+          <Footer/>
         </BrowserRouter>
         <ToastContainer position="bottom-right" autoClose={3000} />
       </CartProvider>

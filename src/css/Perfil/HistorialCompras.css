@@ -14,7 +14,7 @@
 
 .tabla-compras {
     width: 100%;
-    border-collapse: collapse;
+    overflow-x: auto;
 }
 
 .tabla-compras th,

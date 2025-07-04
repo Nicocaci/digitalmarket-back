@@ -1,26 +1,133 @@
-.seccion-detalle{
+.seccion-detalle {
     display: flex;
     justify-content: center;
     margin-top: 10%;
+    margin-bottom: 20%;
 }
 
-.card-detalle{
+.back-button{
+    border: none;
+    background-color: white;
+    color: gray;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+
+}
+.back-button:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.card-detalle {
     width: 60%;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
-    
+
 }
 
-.img-detalle{
+.img-detalle {
     width: 100%;
     height: 50vh;
 }
 
+.card-detail-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cantidad{
+    margin-top: 10%;
+}
+.card-detail {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    align-items: flex-start;
+}
+
+.card-detail h2 {
+    font-size: 40px;
+    margin: 10px 0 20px;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.card-detail p {
+    font-size: 20px;
+    color: #777;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+}
+
+
+.card-detail button {
+    background-color: #A3E635;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+}
+
+
+.card-detail button:hover {
+    background-color: #21867a;
+}
+
+.cantidad-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
+.cantidad-container button {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: gray;
+}
+
+.cantidad-container button:hover {
+    background-color: white;
+    color: black;
+}
+
+.cantidad-container span {
+    min-width: 30px;
+    text-align: center;
+    font-size: 16px;
+}
+
+
 @media (max-width: 575px) {
-    .seccion-detalle{
+    .seccion-detalle {
         margin-top: 40%;
+    }
+    .card-detalle{
+        width: 95%;
+    }
+    .card-detail h2{
+        font-size: 15px;
+    }
+    .img-detalle{
+        height: 100%;
+    }
+    .card-detail p{
+        font-size: 15px;
     }
 }

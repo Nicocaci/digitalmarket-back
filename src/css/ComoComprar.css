@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 10%;
 }
 
 .seccion-envio{
@@ -47,7 +46,18 @@
 }
 
 .titulo-faq{
-    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #fff;
+    background-color:rgb(166 159 136);
+    font-size: 2rem;
+    height: 200px;
+    width: 100%;
+    margin-top: 7%;
 }
 
 .tituloComprar1 {

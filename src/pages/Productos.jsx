@@ -43,7 +43,7 @@ const Productos = () => {
 
     return (
         <div className='page-productos'>
-            <h1 className='titutlo-productos center'>Productos</h1>
+            <h1 className='titulo-productos'>Productos</h1>
             <div className='filtro-busqueda center'>
                 <input
                     type="text"

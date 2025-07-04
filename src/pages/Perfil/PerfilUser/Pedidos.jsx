@@ -9,8 +9,9 @@ const apiUrl = import.meta.env.VITE_API_URL;
 const Pedidos = () => {
     const [userId, setUserId] = useState(null);
     const [orderData, setOrderData] = useState([]);
-    const [loading, setLoading] = useState(true); // para mostrar un loader opcional
+    const [loading, setLoading] = useState(true);
 
+    // Decodificamos el token para obtener el userId
     useEffect(() => {
         const token = Cookies.get('access_token');
         if (token) {
@@ -18,11 +19,12 @@ const Pedidos = () => {
                 const decoded = jwtDecode(token);
                 setUserId(decoded._id);
             } catch (err) {
-                console.error("Error al decodificar el token:", err);
+                console.error('Error al decodificar el token:', err);
             }
         }
     }, []);
 
+    // Una vez que tenemos el userId, pedimos las órdenes
     useEffect(() => {
         if (userId) {
             fetchOrder();
@@ -32,10 +34,10 @@ const Pedidos = () => {
     const fetchOrder = async () => {
         try {
             const response = await axios.get(`${apiUrl}/orders/usuario/${userId}`);
-            console.log("Pedidos recibidos:", response.data);
-            setOrderData(response.data);
+            console.log('Pedidos recibidos:', response.data);
+            setOrderData(response.data.ordenes); // ✅ Corregido: acceder al array real
         } catch (error) {
-            console.error("Error al obtener la orden", error);
+            console.error('Error al obtener la orden', error);
         } finally {
             setLoading(false);
         }
@@ -43,13 +45,13 @@ const Pedidos = () => {
 
     return (
         <div>
-            <h1 className='titulo-tabla-usuario'>Mis pedidos</h1>
-            <div className='seccion-form'>
-                <table className="tabla-pedidos ">
+            <h1 className="titulo-tabla-usuario">Mis pedidos</h1>
+            <div className="seccion-form">
+                <table className="tabla-pedidos">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Usuario</th>
+                            <th>Nombre</th>
                             <th>Fecha</th>
                             <th>Productos</th>
                             <th>Total</th>
@@ -65,13 +67,13 @@ const Pedidos = () => {
                             orderData.map((order, index) => (
                                 <tr key={order._id}>
                                     <td>{index + 1}</td>
-                                    <td>{order.usuario?.nombre || "Sin nombre"}</td>
-                                    <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                                    <td>{order.nombre || 'Sin nombre'}</td>
+                                    <td>{new Date(order.fecha).toLocaleDateString()}</td>
                                     <td>
                                         <ul>
-                                            {order.carrito.map((prod, i) => (
+                                            {order.productos.map((prod, i) => (
                                                 <li key={i}>
-                                                    {prod.nombre} x{prod.cantidad}
+                                                    {prod.nombre} x{prod.quantity}
                                                 </li>
                                             ))}
                                         </ul>

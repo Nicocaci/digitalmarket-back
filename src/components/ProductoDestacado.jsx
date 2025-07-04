@@ -7,6 +7,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 
@@ -98,6 +99,7 @@ const ProductoDestacado = () => {
 
                         {productos.map((prod) => (
                             <SwiperSlide key={prod._id}>
+                                <Link key={prod._id} to={`/productos/${prod._id}`} className="card-link" >
                                 <div className="card">
                                     <img src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
                                     <div className="card-content">
@@ -136,6 +138,7 @@ const ProductoDestacado = () => {
                                         </div>
                                     </div>
                                 </div>
+                                </Link>
                             </SwiperSlide>
                         ))}
 

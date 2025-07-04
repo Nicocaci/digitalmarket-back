@@ -1,35 +1,7 @@
 .inicio {
-    background-color: #2E2E2E;
-    border: 2px solid black;
+    background-color: #dcceab;
 
 }
-
-.hero-banner {
-    width: 100%;
-    height: 50dvh;
-    overflow: hidden;
-    position: relative;
-}
-
-.banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.fade-in {
-    opacity: 1;
-}
-
-.fade-out {
-    opacity: 0;
-}
-
-
 
 .container2 {
     display: flex;
@@ -48,13 +20,13 @@
 
 
 .seccion-descuento{
-    border: 2px solid black;
-    width:80%;
-    background-color: #eaedf2;
+    border: 2px solid #582f7a;
+    width:60%;
+    background-color:rgb(166 159 136);
     margin-bottom: 10%;
     margin-top: 2%;
     border-radius: 10px;
-    padding: 20px;
+    padding: 100px;
 }
 
 
@@ -63,13 +35,14 @@
     justify-content: center;
     align-items: center;
     font-family: "Poppins", sans-serif;
-    font-weight: 600;
+    font-weight: 300;
     font-style: normal;
     color: #fff;
-    background-color: rgb(91, 85, 85);
+    background-color:rgb(166 159 136);
     font-size: 2rem;
-    height: 100px;
+    height: 200px;
 }
+
 
 .filter1 {
     backdrop-filter: blur(10px);
@@ -126,8 +99,6 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-
-
 .text-filter {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
@@ -165,11 +136,15 @@ select {
 
 .card-content h1 {
     font-size: 1rem;
-    margin: 10px 0;
     color: #333;
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
+    font-weight: 800;
     font-style: normal;
+    height: 80px;
+}
+
+.card-content h1:hover{
+    text-decoration:  underline;
 }
 
 .card-content p {
@@ -179,11 +154,11 @@ select {
 }
 
 .card-content .price {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #2a9d8f;
     margin: 5px 0;
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
+    font-weight: 600;
     font-style: normal;
 }
 
@@ -219,6 +194,13 @@ select {
     margin-top: 5%;
 }
 
+.swiper-button-next:after, .swiper-rtl .swiper-button-prev:after {
+    color: rgb(72, 71, 71);
+}
+.swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{
+    color: rgb(72, 71, 71);
+}
+
 @media (max-width: 575px) {
     .container {
         grid-template-columns: repeat(1, 1fr);
@@ -242,6 +224,15 @@ select {
     }
     .title{
         font-size: 1.5rem;
+    }
+
+    .seccion-descuento{
+        width: 90%;
+        padding: 0px;
+    }
+    .swiper{
+        padding: 40px !important;
+        width: 80%;
     }
 
 }

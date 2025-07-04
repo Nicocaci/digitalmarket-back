@@ -4,11 +4,9 @@ import '../css/ComoComprar.css'
 const Nosotros = () => {
   return (
     <div className='seccion-faq'>
-      <div>
-        <h1>Preguntas Frecuentes</h1>
-      </div>
+        <h1 className='titulo-faq'>Preguntas Frecuentes</h1>
       <div className='seccion-como-comprar'>
-        <div className='titulo-faq center'>
+        <div className=' center'>
           <h2>¿Como Comprar?</h2>
         </div>
         <div className='ComoComprar'>
@@ -38,7 +36,7 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className='titulo-faq center'>
+        <div className=' center'>
           <h2>¿Cuales son las formas de envio?</h2>
         </div>
         <div className='seccion-envio2'>
@@ -48,7 +46,7 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className='titulo-faq center'>
+        <div className=' center'>
           <h2>¿Cuanto cuesta un envío?</h2>
         </div>
         <div className='seccion-envio2'>
@@ -56,7 +54,7 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className='titulo-faq center'>
+        <div className=' center'>
           <h2>¿Cuales son las formas de pago?</h2>
         </div>
         <div  className='seccion-envio2'>

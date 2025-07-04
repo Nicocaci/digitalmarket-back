@@ -79,7 +79,7 @@ export const CartProvider = ({ children }) => {
             toast.success("Producto agregado al carrito");
         } catch (error) {
             console.error("Error al agregar producto al carrito:", error);
-            toast.error("Error al agregar producto");
+            toast.error("Error al agregar producto, debes iniciar sesión primero");
         }
     };
 

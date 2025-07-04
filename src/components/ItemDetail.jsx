@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/ItemDetail.css';
+import { useCart } from '../context/CartContext.jsx';
+
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
@@ -9,7 +11,10 @@ const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 const ItemDetail = () => {
     const { id } = useParams();
     const [producto, setProducto] = useState(null);
+    const [cantidades, setCantidades] = useState([]);
     const navigate = useNavigate();
+
+    const { addProductToCart } = useCart();
 
     useEffect(() => {
         axios.get(`${apiUrl}/productos/${id}`)
@@ -20,22 +25,50 @@ const ItemDetail = () => {
             .catch(err => console.error('Error al obtener productos:', err));
     }, [id]);
 
+    const handleAddToCart = (productId) => {
+        const cantidad = cantidades[productId] || 1;
+        addProductToCart(productId, cantidad);
+    };
+
+
+    const handleCantidadChange = (productId, value) => {
+        const cantidad = parseInt(value);
+        if (!isNaN(cantidad) && cantidad > 0) {
+            setCantidades(prev => ({
+                ...prev,
+                [productId]: cantidad
+            }));
+        }
+    };
+
     if (!producto) return <div>Cargando producto...</div>;
 
     return (
         <div className='seccion-detalle'>
             <div className='card-detalle'>
-                <button onClick={() => navigate('/productos')} style={{ marginTop: '1rem' }}>
+                <button onClick={() => navigate('/productos')} className='back-button'>
                     ← Volver a Productos
                 </button>
-                <img className='img-detalle' src={`${apiUrlUD}/uploads/${producto.imagen[0]}`} alt={producto.nombre} />
-                <div className='card-content'>
-                    <h2>{producto.nombre}</h2>
-                    <p><strong>Precio:</strong> ${producto.precio}</p>
-                    <p><strong>Categoría:</strong> {producto.categoria}</p>
-                    <p><strong>Stock:</strong> {producto.stock}</p>
+                <div className='card-detail-container'>
+                    <div>
+                        <img className='img-detalle' src={`${apiUrlUD}/uploads/${producto.imagen[0]}`} alt={producto.nombre} />
+                    </div>
+                    <div className='card-detail'>
+                        <h2>{producto.nombre}</h2>
+                        <p><strong>SKU:</strong> {producto._id}</p>
+                        <p><strong>Precio:</strong> ${producto.precio}</p>
+                        <p><strong>Categoría:</strong> {producto.categoria}</p>
+                        <p className='cantidad'>Cantidad</p>
+                        <div className="cantidad-container">
+                            <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) - 1)}>-</button>
+                            <span>{cantidades[producto._id] || 1}</span>
+                            <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) + 1)}>+</button>
+                        </div>
+
+                        <button onClick={() => handleAddToCart(producto._id, 1)}>Añadir al carrito</button>
+                    </div>
                 </div>
-                <button>Añadir al carrito</button>
+
             </div>
         </div>
     );

@@ -1,6 +1,16 @@
 .titulo-user{
-    color: black;
-    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    color: #fff;
+    background-color:rgb(166 159 136);
+    font-size: 2rem;
+    height: 200px;
+    width: 100%;
+    margin-top: 5%;
 }
 
 .seccion-form{

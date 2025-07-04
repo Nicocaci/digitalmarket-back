@@ -1,0 +1,85 @@
+.seccion-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    margin: auto;
+    background-color: #dcceab;
+    color: black;
+    height: 100%;
+    border-top: 2px solid #582f7a;
+    padding: 50px 450px 50px 450px;
+}
+
+.seccion-container {
+    border-right: 1px solid gray;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.seccion-container-new {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.titulo-footer {
+    color: red;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
+}
+
+.footer-content {
+    list-style: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 12px;
+}
+
+.footer-content a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* En tu Footer.css */
+.link-footer {
+    background: none;
+    border: none;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+}
+
+@media (max-width: 575px){
+    .seccion-footer{
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .footer{
+        width: 55%;
+        align-items: center;
+    }
+
+    .seccion-container{
+        padding: 20px;
+    }
+
+    .seccion-container-new{
+        padding: 20px;
+    }
+}

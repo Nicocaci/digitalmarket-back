@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion'; // ← importamos Framer Motion
 import '../css/Gracias.css';
 
 const Gracias = () => {
@@ -17,18 +18,31 @@ const Gracias = () => {
 
     return (
         <div className="gracias-container">
-            <h2>¡Gracias por tu compra, {orden.nombre}!</h2>
-            <p>Te enviamos un correo a <strong>{orden.email}</strong> con los detalles.</p>
+            <motion.div
+                className="gracias-card"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+            >
+                <h2>¡Gracias por tu compra, {orden.nombre}!</h2>
+                <p>Te enviamos un correo a <strong>{orden.email}</strong> con los detalles del pedido.</p>
 
-            <h3>Resumen del pedido:</h3>
-            <ul>
-                {orden.productos.map((item, index) => (
-                    <li key={index}>
-                        {item.nombre} x{item.quantity} - ${item.precio * item.quantity}
-                    </li>
-                ))}
-            </ul>
-            <h4>Total: ${orden.total.toFixed(2)}</h4>
+                <div className="gracias-resumen">
+                    <h3>Resumen del pedido</h3>
+                    <ul>
+                        {orden.productos.map((item, index) => (
+                            <li key={index}>
+                                {item.nombre} x{item.quantity} - ${item.precio * item.quantity}
+                            </li>
+                        ))}
+                    </ul>
+                    <h4>Total: ${orden.total.toFixed(2)}</h4>
+                </div>
+
+                <button className="gracias-boton" onClick={() => navigate('/')}>
+                    Seguir comprando
+                </button>
+            </motion.div>
         </div>
     );
 };

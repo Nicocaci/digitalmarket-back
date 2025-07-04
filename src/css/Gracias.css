@@ -1,16 +1,75 @@
 .gracias-container {
-    padding: 2rem;
-    max-width: 600px;
-    margin: auto;
-    background-color: #f5f5f5;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  background-color: #f7f7f7;
+  
 }
 
-.gracias-container h2 {
-    color: #4CAF50;
+.gracias-card {
+  background-color: white;
+  padding: 2rem 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
 }
 
-.gracias-container ul {
-    padding-left: 1.5rem;
+.gracias-card h2 {
+  color: #2ecc71;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.gracias-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.gracias-resumen {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.gracias-resumen h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.gracias-resumen ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.gracias-resumen li {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.gracias-resumen h4 {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #000;
+}
+
+.gracias-boton {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.gracias-boton:hover {
+  background-color: #2980b9;
 }

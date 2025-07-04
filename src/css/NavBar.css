@@ -1,11 +1,12 @@
 .navBar-container {
-    background-color: black;
+    background-color: #dcceab;
     height: 15vh;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
+    border-bottom: 2px solid #582f7a;
 
 }
 
