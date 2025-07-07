@@ -1,8 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import '../../../css/Perfil/PerfilAdmin.css';
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const CrearProducto = () => {
@@ -12,8 +12,9 @@ const CrearProducto = () => {
         imagen: "",
         precio: "",
         stock: "",
-    })
+    });
 
+    const [fileNames, setFileNames] = useState([]); // para mostrar los nombres
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,10 +25,12 @@ const CrearProducto = () => {
     };
 
     const handleImageChange = (e) => {
+        const files = Array.from(e.target.files);
         setFormData(prev => ({
             ...prev,
-            imagen: Array.from(e.target.files)
+            imagen: files
         }));
+        setFileNames(files.map(file => file.name));
     };
 
     const handleSubmit = async (e) => {
@@ -50,7 +53,6 @@ const CrearProducto = () => {
                 formDataToSend.append("precio", formData.precio);
                 formDataToSend.append("stock", formData.stock);
 
-
                 try {
                     await axios.post(`${apiUrl}/productos`,
                         formDataToSend,
@@ -70,7 +72,8 @@ const CrearProducto = () => {
                         imagen: "",
                         precio: "",
                         stock: "",
-                    })
+                    });
+                    setFileNames([]);
                 } catch (error) {
                     console.error("Error:", error);
                     Swal.fire({
@@ -81,66 +84,73 @@ const CrearProducto = () => {
                     });
                 }
             }
-        })
+        });
     };
 
     return (
         <form onSubmit={handleSubmit} className='crearProducto'>
-            <h2 className='center'>Crear Producto</h2>
+            <h2 className='titulos-admin'>Crear Producto</h2>
             <div className='grid-productos'>
-            <input
-                type="text"
-                name='nombre'
-                className='input-crear'
-                placeholder='Nombre del producto'
-                value={formData.nombre}
-                onChange={handleChange}
-                required />
+                <input
+                    type="text"
+                    name='nombre'
+                    className='input-crear'
+                    placeholder='Nombre del producto'
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required />
 
-            <input
-                type="text"
-                name='categoria'
-                className='input-crear'
-                placeholder='Categoria del producto'
-                value={formData.categoria}
-                onChange={handleChange}
-                required />
-
-            <input
-                type="file"
-                name="imagen"
-                className='input-upload'
-                accept="image/*"
-                multiple
-                onChange={handleImageChange}
-                required
-            />
+                <input
+                    type="text"
+                    name='categoria'
+                    className='input-crear'
+                    placeholder='Categoría del producto'
+                    value={formData.categoria}
+                    onChange={handleChange}
+                    required />
             </div>
             <div className='grid-productos'>
-            <input
-                type="number"
-                name="precio"
-                className='input-crear'
-                placeholder='Precio $$'
-                value={formData.precio}
-                onChange={handleChange} />
-            <input
-                type="number"
-                name='stock'
-                className='input-crear'
-                placeholder='Stock'
-                value={formData.stock}
-                onChange={handleChange}
-                required />
+                <input
+                    type="number"
+                    name="precio"
+                    className='input-crear'
+                    placeholder='Precio $$'
+                    value={formData.precio}
+                    onChange={handleChange} />
+
+                {/* Botón personalizado para input file */}
+                <div>
+                    <label htmlFor="imagen" className="custom-file-label">
+                        Subir imagen
+                    </label>
+                    <input
+                        type="file"
+                        id="imagen"
+                        name="imagen"
+                        className="hidden-input"
+                        accept="image/*"
+                        multiple
+                        onChange={handleImageChange}
+                        required
+                    />
+                    {/* Mostrar nombre de archivos seleccionados */}
+                    {fileNames.length > 0 && (
+                        <div className="file-names">
+                            {fileNames.map((name, index) => (
+                                <div key={index}>{name}</div>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div className='btn-flex'>
-            <button type="submit" className="btn-crear">
-                Crear Producto
-            </button>
+                <button type="submit" className="btn-crear">
+                    Crear Producto
+                </button>
             </div>
         </form>
-    )
-}
+    );
+};
 
-export default CrearProducto
+export default CrearProducto;

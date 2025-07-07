@@ -1,7 +1,7 @@
 .historial-container {
     padding: 20px;
     border: 1px solid #ddd;
-    width: 80%;
+    width: 50%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
@@ -10,6 +10,11 @@
 .historial-titulo {
     font-size: 24px;
     margin-bottom: 20px;
+}
+
+.scroll{
+    width: 100%;
+    overflow-x: auto;
 }
 
 .tabla-compras {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../css/AuthModal.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useCart } from '../context/CartContext';
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -43,17 +44,31 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
         withCredentials: true,
       });
 
-      alert(response.data.message);
-      onClose();
-      refreshCartContext();
-
-          // 👇 Refrescar la página automáticamente
-    window.location.reload();
+      Swal.fire({
+        icon: 'success',
+        title: type === 'login' ? 'Bienvenido a DigitalShop' : 'Registro exitoso',
+        text: response.data.message,
+        confirmButtonColor: '#3085d6',
+      }).then(() => {
+        onClose();
+        refreshCartContext();
+        window.location.reload();
+      });
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.response.data.message,
+          confirmButtonColor: '#d33',
+        });
       } else {
-        alert('Error de conexión con el servidor');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error de conexión',
+          text: 'No se pudo conectar con el servidor',
+          confirmButtonColor: '#d33',
+        });
       }
     }
   };
@@ -110,7 +125,6 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
           </button>
         </form>
 
-        {/* Botón para alternar entre login y registro */}
         <div className="modal-footer">
           {type === 'login' ? (
             <p>

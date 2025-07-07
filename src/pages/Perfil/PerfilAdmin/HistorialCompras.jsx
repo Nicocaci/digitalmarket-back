@@ -20,7 +20,8 @@ const HistorialCompras = () => {
 
     return (
         <div className="historial-container">
-            <h2 className="historial-titulo">Historial de Compras</h2>
+            <h2 className="titulos-admin">Historial de Compras</h2>
+            <div className='scroll'>
             <table className="tabla-compras">
                 <thead>
                     <tr>
@@ -76,6 +77,7 @@ const HistorialCompras = () => {
                                                 ))}
                                             </tbody>
                                         </table>
+                                        
                                     </td>
                                 </tr>
                             )}
@@ -83,6 +85,7 @@ const HistorialCompras = () => {
                     ))}
                 </tbody>
             </table>
+            </div>
         </div>
     );
 };

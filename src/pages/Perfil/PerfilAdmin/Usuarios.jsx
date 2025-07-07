@@ -26,8 +26,10 @@ const Usuarios = () => {
 
   return (
     <div className='seccion-usuarios'>
-      <div><h1>Listado de Clientes</h1></div>
       <div>
+        <h2 className='titulos-admin'>Listado de Clientes</h2>
+      </div>
+      <div className='scroll'>
         <table className='tabla-compras'>
           <thead>
             <tr>

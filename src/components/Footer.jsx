@@ -64,7 +64,7 @@ const Footer = () => {
                         <h2 className='titulo-footer'>Siganos en las redes</h2>
                         <li className='footer-content'>Ig</li>
                         <li className='footer-content'>TikTok</li>
-                        <li className='footer-content'>hola</li>
+                        <li className='footer-content'>Facebook</li>
                     </ul>
                 </div>
             </footer>

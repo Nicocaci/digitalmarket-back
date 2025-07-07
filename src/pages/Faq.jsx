@@ -7,7 +7,7 @@ const Nosotros = () => {
         <h1 className='titulo-faq'>Preguntas Frecuentes</h1>
       <div className='seccion-como-comprar'>
         <div className=' center'>
-          <h2>¿Como Comprar?</h2>
+          <h2 className='tituloComprar'>¿Como Comprar?</h2>
         </div>
         <div className='ComoComprar'>
           <div className='ComoComprarCards'>
@@ -37,7 +37,7 @@ const Nosotros = () => {
       </div>
       <div className='seccion-envio'>
         <div className=' center'>
-          <h2>¿Cuales son las formas de envio?</h2>
+          <h2 className='tituloComprar'>¿Cuales son las formas de envio?</h2>
         </div>
         <div className='seccion-envio2'>
           <p className='textofaq'>Al finalizar tu compra podés elegir recibir el pedido en tu domicilio o retirarlo en nuestro local.
@@ -46,8 +46,8 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className=' center'>
-          <h2>¿Cuanto cuesta un envío?</h2>
+        <div className='center'>
+          <h2 className='tituloComprar'>¿Cuanto cuesta un envío?</h2>
         </div>
         <div className='seccion-envio2'>
           <p className='textofaq'>¡El costo de envío es GRATIS! Sí, por tiempo limitado estamos bonificando nuestro costo de envío para que pruebes nuestro servicio. Sólo recordá que el monto mínimo de compra es de $2000.!</p>
@@ -55,7 +55,7 @@ const Nosotros = () => {
       </div>
       <div className='seccion-envio'>
         <div className=' center'>
-          <h2>¿Cuales son las formas de pago?</h2>
+          <h2 className='tituloComprar'>¿Cuales son las formas de pago?</h2>
         </div>
         <div  className='seccion-envio2'>
           <p className='textofaq'>Podés abonar al momento de recibir tu compra en efectivo, tarjeta de crédito o débito. Recordá que para abonar con tarjetas en el domicilio el titular deberá estar presente para recibir la compra. También podés solicitar recibir un botón de pago electrónico una vez que facturemos tu pedido, con este podrás abonar en MercadoPago con cualquier tarjeta, sin necesidad de que el titular esté presente al momento de recibir la compra. Te recordamos que pueden existir pequeñas diferencias entre el valor indicado al finalizar la compra y el valor facturado, debido a variaciones de peso en los productos pesable o faltante de stock. Comprá online y recibí tu pedido a domicilio.</p>

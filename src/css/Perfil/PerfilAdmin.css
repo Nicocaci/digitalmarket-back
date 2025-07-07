@@ -1,5 +1,5 @@
 .crearProducto {
-    width: 80%;
+    width: 50%;
     padding: 20px;
     background: #ffffff;
     border: 1px solid #ddd;
@@ -10,16 +10,20 @@
     font-style: normal;
 
 }
-.input-crear{
-    width: 50%;
+
+.input-crear {
     border-radius: 100px;
     padding: 10px 25px;
     font-size: 18px;
-    
+    margin: 10px;
+
 }
 
+.titulos-admin{
+    font-family: "Poppins", sans-serif;
+}
 
-.input-upload{
+.input-upload {
     width: 80%;
     margin-bottom: 2%;
     font-family: "Poppins", sans-serif;
@@ -34,19 +38,19 @@
     height: 30px;
     border-radius: 6px;
     width: 50%;
-    display: flex;  
+    display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     border: none;
 }
 
-.btn-crear:hover{
-    background:#2f5253;
+.btn-crear:hover {
+    background: #2f5253;
 }
 
-.btn-flex{
-    display:flex ;
+.btn-flex {
+    display: flex;
     justify-content: center;
 }
 
@@ -58,18 +62,46 @@
     align-items: center;
 }
 
-.grid-productos{
+.grid-productos {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
+.custom-file-label {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+    font-family: "Poppins", sans-serif;
+}
+
+.custom-file-label:hover {
+    background-color: #45a049;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.file-names {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+
 @media (max-width: 575px) {
-    .crearProducto{
+    .crearProducto {
         width: 100%;
     }
-    .input-crear{
+
+    .input-crear {
         width: 100%;
     }
 }
-
