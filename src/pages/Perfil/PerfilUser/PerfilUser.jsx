@@ -92,7 +92,7 @@ const PerfilUser = () => {
           {activeTab === 'cuenta' && (
             <>
               <h4 className='titulo-tabla-usuario'>Datos Personales</h4>
-              <form className='form-usuario' onSubmit={handleUpdate}>
+              <form className='formUser' onSubmit={handleUpdate}>
                 <label>Email: </label>
                 <input type="email" name='email' value={formData.email} onChange={handleChange} />
 
@@ -107,8 +107,9 @@ const PerfilUser = () => {
 
                 <label>Dirección: </label>
                 <input type="text" name='direccion' value={formData.direccion} onChange={handleChange} />
-                
+                <div className='center'>
                 <button className='btn-usuario' type='submit'>Actualizar Información</button>
+                </div>
               </form>
             </>
           )}

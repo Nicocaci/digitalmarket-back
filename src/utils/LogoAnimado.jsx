@@ -3,7 +3,7 @@ import '../css/NavBar.css'
 function LogoAnimado() {
   return (
     <video
-      src="/logogif.mp4"
+      src="/logogifnew.mp4"
       autoPlay
       muted
       loop

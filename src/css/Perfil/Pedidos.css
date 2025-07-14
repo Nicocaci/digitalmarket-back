@@ -1,12 +1,19 @@
 .tabla-pedidos{
+    border-collapse: collapse;
+    color: white;
+    width: 700px;
 }
 
 .tabla-pedidos th,
 .tabla-pedidos td {
-    border: 1px solid #ddd;
+    border: 1px solid #ff7d12;
     padding: 8px;
     text-align: left;
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
+    font-weight: 500;
     font-style: normal;
+}
+
+.li-none{
+    list-style: none;
 }

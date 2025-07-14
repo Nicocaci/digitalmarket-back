@@ -3,15 +3,15 @@
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
     margin: auto;
-    background-color: #dcceab;
+    background-color: white;
     color: black;
     height: 100%;
-    border-top: 2px solid #582f7a;
+    border-top: 2px solid #1c24a2;
     padding: 50px 450px 50px 450px;
 }
 
 .seccion-container {
-    border-right: 1px solid gray;
+    border-right: 1px solid #1c24a2;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -26,11 +26,11 @@
 }
 
 .titulo-footer {
-    color: red;
+    color: #ff7d12;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .footer-content {
@@ -38,7 +38,7 @@
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-style: normal;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .footer-content a {
@@ -56,11 +56,12 @@
 .link-footer {
     background: none;
     border: none;
-    color: inherit;
     text-align: left;
     cursor: pointer;
-    font-size: inherit;
     padding: 0;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16px;
 }
 
 @media (max-width: 575px){
@@ -81,5 +82,8 @@
 
     .seccion-container-new{
         padding: 20px;
+    }
+    .titulo-footer{
+        width: 300px;
     }
 }

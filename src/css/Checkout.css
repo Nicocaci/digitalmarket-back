@@ -1,10 +1,10 @@
 .checkout-container {
-  max-width: 600px;
+  width: 35%;
   margin: 2rem auto;
   padding: 1rem;
   background: #f5f5f5;
   border-radius: 10px;
-  margin-top: 20%;
+  margin-top: 10%;
 }
 
 .checkout-section {
@@ -13,7 +13,6 @@
 
 .checkout-form input {
   display: block;
-  width: 100%;
   margin: 0.5rem 0;
   padding: 10px;
   border-radius: 5px;
@@ -48,3 +47,11 @@
   justify-content: space-between;
 }
 
+@media (max-width: 575px){
+  .checkout-container{
+    width: 80%;
+    margin: auto;
+    margin-top: 30%;
+    margin-bottom: 30%;
+  }
+}

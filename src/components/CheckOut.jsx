@@ -29,7 +29,7 @@ const CheckOut = () => {
 
     return (
         <div className="checkout-container">
-            <h2>Checkout - Paso {step}</h2>
+            <h2>Finalizar Cómpra - Paso {step}</h2>
             <CheckoutStepper step={step} />
             {step === 1 && <Paso1Datos formData={formData} updateFormData={updateFormData} nextStep={nextStep} />}
             {step === 2 && <Paso2Pago formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />}

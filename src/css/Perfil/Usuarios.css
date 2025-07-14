@@ -13,6 +13,20 @@
     width: 100%;
     overflow-x: auto;
 }
+.filtros-usuarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input-filtro {
+  padding: 8px 12px;
+  border: 1px solid #1c24a2;
+  border-radius: 5px;
+  font-size: 1rem;
+  min-width: 200px;
+}
 
 @media (max-width: 575px) {
     .seccion-usuarios {

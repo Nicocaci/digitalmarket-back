@@ -2,7 +2,7 @@
     width: 50%;
     padding: 20px;
     background: #ffffff;
-    border: 1px solid #ddd;
+    border: 1px solid #1c24a2;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: "Poppins", sans-serif;
@@ -13,6 +13,7 @@
 
 .input-crear {
     border-radius: 100px;
+    border: 2px solid #1c24a2;
     padding: 10px 25px;
     font-size: 18px;
     margin: 10px;
@@ -21,6 +22,7 @@
 
 .titulos-admin{
     font-family: "Poppins", sans-serif;
+    color: #1c24a2;
 }
 
 .input-upload {
@@ -30,8 +32,9 @@
 }
 
 .btn-crear {
-    background: #007b7f;
+    background: #ff7d12;
     font-family: "Poppins", sans-serif;
+    font-weight: 500;
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 2%;
@@ -41,12 +44,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: black;
     border: none;
 }
 
 .btn-crear:hover {
-    background: #2f5253;
+    background: #1c24a2;
+    color: white;
 }
 
 .btn-flex {
@@ -58,7 +62,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-top: 10%;
+    margin-top: 2%;
     align-items: center;
 }
 
@@ -70,7 +74,7 @@
 
 .custom-file-label {
     display: inline-block;
-    background-color: #4CAF50;
+    background-color: #1c24a2;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
@@ -82,7 +86,8 @@
 }
 
 .custom-file-label:hover {
-    background-color: #45a049;
+    background-color:#ff7d12;
+    color: black;   
 }
 
 .hidden-input {

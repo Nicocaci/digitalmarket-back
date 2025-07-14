@@ -35,7 +35,7 @@ const Footer = () => {
             <footer className='seccion-footer'>
                 <div className='seccion-container' >
                     <ul className='footer'>
-                        <h2 className='titulo-footer'>Ayuda</h2>
+                        <h2 className='titulo-footer center'>Ayuda</h2>
                         <li className='footer-content'><a href="/faq">Cómo Comprar?</a></li>
                         <li className='footer-content'><a href="/faq">Formas de Envío</a></li>
                         <li className='footer-content'><a href="/contacto">Contacto</a></li>
@@ -43,7 +43,7 @@ const Footer = () => {
                 </div>
                 <div className='seccion-container'>
                     <ul className='footer'>
-                        <h2 className='titulo-footer'>Mi cuenta</h2>
+                        <h2 className='titulo-footer center'>Mi cuenta</h2>
                         {userId ? (
                             <li className='footer-content'><a href="/perfil">Perfil</a></li>
                         ) : (
@@ -61,7 +61,7 @@ const Footer = () => {
                 </div>
                 <div className='seccion-container-new'>
                     <ul className='footer'>
-                        <h2 className='titulo-footer'>Siganos en las redes</h2>
+                        <h2 className='titulo-footer center'>Siganos en las redes</h2>
                         <li className='footer-content'>Ig</li>
                         <li className='footer-content'>TikTok</li>
                         <li className='footer-content'>Facebook</li>

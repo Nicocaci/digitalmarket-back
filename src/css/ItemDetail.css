@@ -8,21 +8,22 @@
 .back-button{
     border: none;
     background-color: white;
-    color: gray;
+    color: #ff7d12;
     font-family: "Poppins", sans-serif;
-    font-size: 15px;
+    font-size: 17px;
 
 }
 .back-button:hover{
-    color: black;
+    color: #1c24a2;
     cursor: pointer;
+    transition: 1s;
 }
 
 .card-detalle {
     width: 60%;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #1c24a2;
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
 
@@ -65,8 +66,8 @@
 
 
 .card-detail button {
-    background-color: #A3E635;
-    color: #fff;
+    background-color: #ff7d12;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -80,7 +81,8 @@
 
 
 .card-detail button:hover {
-    background-color: #21867a;
+    background-color: #1c24a2;
+    color: white;
 }
 
 .cantidad-container {
@@ -116,7 +118,7 @@
 
 @media (max-width: 575px) {
     .seccion-detalle {
-        margin-top: 40%;
+        margin-top: 50%;
     }
     .card-detalle{
         width: 95%;

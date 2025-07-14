@@ -5,6 +5,7 @@
     align-items: center;
     flex-direction: column;
     margin-bottom: 5%;
+    margin-top: 2%;
 }
 
 .seccion-envio{
@@ -17,10 +18,10 @@
 }
 
 .seccion-envio2{
-    border: 1px, solid, gray;
+    border: 1px, solid, #1c24a2;
     padding: 30px;
     border-radius: 10px;
-    background: #ffff;
+    background: #ff7d12c1;
 }
 
 
@@ -34,16 +35,17 @@
 }
 
 .ComoComprarCards {
-    border: 1px, solid, gray;
+    border: 1px, solid, #1c24a2;
     padding: 30px;
     border-radius: 10px;
-    background: #ffff;
+    background: #ff7d12c1;
 }
 
 .textofaq {
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
+    font-weight: 500;
     font-style: normal;
+    color: black;
 }
 
 .titulo-faq{
@@ -51,10 +53,15 @@
     justify-content: center;
     align-items: center;
     font-family: "Poppins", sans-serif;
-    font-weight: 300;
+    font-weight: 600;
     font-style: normal;
-    color: #fff;
-    background-color:rgb(166 159 136);
+    color: #ff7d12;
+    text-shadow:
+        -1px -1px 0 white,
+        1px -1px 0 white,
+        -1px 1px 0 white,
+        1px 1px 0 white;
+    background-color:#1c24a2b5;
     font-size: 2rem;
     height: 200px;
     width: 100%;
@@ -65,36 +72,39 @@
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
-    color: #818cf8;
+    color: #1c24a2;
 }
 
 .tituloComprar2 {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
-    color: #A3E635;
+    color: #1c24a2;
 }
 
 .tituloComprar3 {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
-    color: #FFAC15;
+    color: #1c24a2;
 }
 
 .tituloComprar4 {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
-    color: #22D3EE;
+    color: #1c24a2;
 }
-
+.titulo-container{
+    width: 100%;
+    height: 100px;
+}
 .tituloComprar {
     margin-top: 2%;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-style: normal;
-
+    color: #ff7d12;
 }
 
 @media (max-width: 575px) {
@@ -107,5 +117,8 @@
     }
     .seccion-envio{
         width: 90%;
+    }
+    .titulo-faq{
+        margin: 0;
     }
 }

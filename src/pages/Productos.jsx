@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 
-
 const Productos = () => {
     const [productos, setProductos] = useState([]);
     const [filtro, setFiltro] = useState('');
     const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('');
+    const [mostrarFiltros, setMostrarFiltros] = useState(false); // 👈 nuevo
 
     useEffect(() => {
         fetchProductos();
@@ -30,55 +30,99 @@ const Productos = () => {
         }
     }
 
-    // Extraer categorías únicas
     const categorias = [...new Set(productos.map(p => p.categoria))];
 
-    // Filtrar productos por nombre y categoría
     const productosFiltrados = productos.filter((prod) => {
         const nombreCoincide = prod.nombre.toLowerCase().includes(filtro.toLowerCase());
         const categoriaCoincide = categoriaSeleccionada === '' || prod.categoria === categoriaSeleccionada;
         return nombreCoincide && categoriaCoincide;
     });
 
-
     return (
-        <div className='page-productos'>
-            <h1 className='titulo-productos'>Productos</h1>
-            <div className='filtro-busqueda center'>
+        <div className="page-productos">
+            <h1 className="titulo-productos">Productos</h1>
+
+            {/* Botón visible solo en móviles */}
+            <button className="btn-filtros-movil" onClick={() => setMostrarFiltros(true)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
+                    <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5" />
+                </svg>
+            </button>
+
+            {/* Panel lateral */}
+            <div className={`sidebar-filtros panel-deslizable ${mostrarFiltros ? 'mostrar' : ''}`}>
+                <button className="cerrar-filtros" onClick={() => setMostrarFiltros(false)}>✖</button>
                 <input
                     type="text"
-                    placeholder="Buscar producto por nombre..."
+                    placeholder="Buscar por nombre..."
                     value={filtro}
                     onChange={(e) => setFiltro(e.target.value)}
+                    className="input-busqueda"
                 />
-
-                <select
-                    value={categoriaSeleccionada}
-                    onChange={(e) => setCategoriaSeleccionada(e.target.value)}
-                    style={{ marginLeft: '1rem' }}
-                >
-                    <option value="">Todas las categorías</option>
+                <ul className="lista-categorias">
+                    <li
+                        className={categoriaSeleccionada === '' ? 'activa' : ''}
+                        onClick={() => setCategoriaSeleccionada('')}
+                    >
+                        Todas las categorías
+                    </li>
                     {categorias.map((cat, idx) => (
-                        <option  key={idx} value={cat}>{cat}</option>
+                        <li
+                            key={idx}
+                            className={categoriaSeleccionada === cat ? 'activa' : ''}
+                            onClick={() => setCategoriaSeleccionada(cat)}
+                        >
+                            {cat}
+                        </li>
                     ))}
-                </select>
+                </ul>
             </div>
-            <div className='container-productos'>
-                {productosFiltrados.map((prod, index) => (
-                    <Link key={prod._id} to={`/productos/${prod._id}`} className="card-link">
-                    <div key={prod._id} className='card card-productos'>
-                        <img className='' src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
-                        <div className='card-content'>
-                            <h1>{prod.nombre}</h1>
-                            <h2 className='precio'>${(prod.precio * 1.305).toFixed(2)}</h2>
-                        </div>
-                    </div>
-                    </Link>
-                ))}
+
+            <div className="productos-layout">
+                {/* Sidebar fija en desktop */}
+                <aside className="sidebar-filtros desktop-only">
+                    <input
+                        type="text"
+                        placeholder="Buscar por nombre..."
+                        value={filtro}
+                        onChange={(e) => setFiltro(e.target.value)}
+                        className="input-busqueda"
+                    />
+                    <ul className="lista-categorias">
+                        <li
+                            className={categoriaSeleccionada === '' ? 'activa' : ''}
+                            onClick={() => setCategoriaSeleccionada('')}
+                        >
+                            Todas las categorías
+                        </li>
+                        {categorias.map((cat, idx) => (
+                            <li
+                                key={idx}
+                                className={categoriaSeleccionada === cat ? 'activa' : ''}
+                                onClick={() => setCategoriaSeleccionada(cat)}
+                            >
+                                {cat}
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+
+                <div className="container-productos">
+                    {productosFiltrados.map((prod) => (
+                        <Link key={prod._id} to={`/productos/${prod._id}`} className="card-link">
+                            <div className="card card-productos">
+                                <img src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
+                                <div className="card-content">
+                                    <h1>{prod.nombre}</h1>
+                                    <h2 className="precio">${(prod.precio * 1.305).toFixed(2)}</h2>
+                                </div>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
             </div>
         </div>
-
-    )
+    );
 }
 
 export default Productos;

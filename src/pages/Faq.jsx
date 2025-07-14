@@ -6,7 +6,7 @@ const Nosotros = () => {
     <div className='seccion-faq'>
         <h1 className='titulo-faq'>Preguntas Frecuentes</h1>
       <div className='seccion-como-comprar'>
-        <div className=' center'>
+        <div className=' center titulo-container'>
           <h2 className='tituloComprar'>¿Como Comprar?</h2>
         </div>
         <div className='ComoComprar'>
@@ -36,7 +36,7 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className=' center'>
+        <div className='titulo-container center '>
           <h2 className='tituloComprar'>¿Cuales son las formas de envio?</h2>
         </div>
         <div className='seccion-envio2'>
@@ -46,7 +46,7 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className='center'>
+        <div className='center titulo-container'>
           <h2 className='tituloComprar'>¿Cuanto cuesta un envío?</h2>
         </div>
         <div className='seccion-envio2'>
@@ -54,7 +54,7 @@ const Nosotros = () => {
         </div>
       </div>
       <div className='seccion-envio'>
-        <div className=' center'>
+        <div className=' center titulo-container'>
           <h2 className='tituloComprar'>¿Cuales son las formas de pago?</h2>
         </div>
         <div  className='seccion-envio2'>

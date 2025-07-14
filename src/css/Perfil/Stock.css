@@ -2,19 +2,18 @@
     width: 50%;
     padding: 20px;
     background: #ffffff;
-    border: 1px solid #ddd;
+    border: 1px solid #1c24a2;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
 }
 
-.tabla-productos{
+.tabla-productos {
     height: 500px;
     overflow: auto;
 }
 
 
-.listado-productos{
+.listado-productos {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -23,9 +22,9 @@
     border-radius: 10px;
 }
 
-.img-productos{
+.img-productos {
     width: 100%;
-    height:100px;
+    height: 100px;
 }
 
 .modal-editar {
@@ -34,7 +33,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,6 +44,7 @@
     padding: 20px;
     border-radius: 8px;
     width: 400px;
+    border: 1px solid #1c24a2;
 }
 
 .modal-content label {
@@ -59,8 +59,83 @@
     margin-top: 15px;
 }
 
+.filtros-stock {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.input-filtro {
+    padding: 8px 12px;
+    border: 1px solid #1c24a2;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.btn-stock {
+    background: #ff7d12;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 2%;
+    height: 30px;
+    border-radius: 6px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    border: none;
+}
+
+.btn-stock:hover {
+    background-color: #1c24a2;
+    color: white;
+}
+
+.input-stock {
+    border-radius: 100px;
+    border: 2px solid #1c24a2;
+    padding: 10px 25px;
+    font-size: 15px;
+    margin: 10px;
+}
+
+.btn-guardar-stock {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #ff7d12;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+    
+}
+.btn-cancelar-stock{
+        padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #ff7d12;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+}
+.btn-guardar-stock:hover{
+    background-color: #1c24a2;
+    color: white;
+    transition: 1s;
+}
+
+.btn-cancelar-stock:hover{
+    background-color: #1c24a2;
+    color: white;
+    transition: 1s;
+}
 @media (max-width: 575px) {
-    .seccion-productos{
+    .seccion-productos {
         width: 100%;
     }
 }

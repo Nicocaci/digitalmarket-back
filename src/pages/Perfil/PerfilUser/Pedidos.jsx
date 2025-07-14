@@ -44,7 +44,7 @@ const Pedidos = () => {
     };
 
     return (
-        <div>
+        <div className=''>
             <h1 className="titulo-tabla-usuario">Mis pedidos</h1>
             <div className="seccion-form">
                 <table className="tabla-pedidos">
@@ -70,7 +70,7 @@ const Pedidos = () => {
                                     <td>{order.nombre || 'Sin nombre'}</td>
                                     <td>{new Date(order.fecha).toLocaleDateString()}</td>
                                     <td>
-                                        <ul>
+                                        <ul className='li-none'>
                                             {order.productos.map((prod, i) => (
                                                 <li key={i}>
                                                     {prod.nombre} x{prod.quantity}

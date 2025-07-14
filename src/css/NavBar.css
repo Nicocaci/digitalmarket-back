@@ -1,13 +1,27 @@
+.nav-destacado{
+    background-color: #1c24a2;
+    border-bottom:2px solid #ff7d12;
+}
+
+.nav-destacado-list{
+    width: 100%;
+    height: 50px;
+    color: white;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 .navBar-container {
-    background-color: #dcceab;
-    height: 15vh;
+    background-color: white;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 999;
-    border-bottom: 2px solid #582f7a;
-
+    border-bottom: 2px solid #ff7d12;
 }
 
 .navBar {
@@ -27,13 +41,17 @@
 }
 
 .navBar-title {
-    color: black;
+    color: #1c24a2;
     text-decoration: none;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-style: normal;
 }
 
+.navBar-title:hover{
+    color: #ff7d12;
+    transition:1s;
+}
 
 .logo {
     height: 10vh;
@@ -41,8 +59,8 @@
 }
 
 .logo-animado {
-    height: 100px;
-    border-radius: 10%;
+    height: 75px;
+    
 }
 
 .navBar-list {
@@ -52,14 +70,37 @@
 }
 
 .login-button {
+    color: white;
+    background-color: #1c24a2 ;
+    border: 1px solid white;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.login-button:hover{
+    background-color: #ff7d12;
     color: black;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.logo-cart{
+    fill: #1c24a2;
+    transition: transform 0.3s ease;
+}
+.logo-cart:hover{
+    transform: scale(1.1); /* agrandar al hacer hover */
+    fill: #ff7d12; /* color al hacer hover */
 }
 
 .register-button {
     color: black;
 }
 
-.logo-cart {}
+.cart-button{
+    border: none;
+    background-color: white;
+}
 
 .logout-button {}
 
@@ -97,9 +138,6 @@
         margin-top: 10%;
     }
 
-    .navBar-title {
-        color: black;
-    }
 
     .navBar-list.open {
         display: flex;

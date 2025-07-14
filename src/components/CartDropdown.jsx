@@ -37,7 +37,7 @@ const CartDropdown = ({ visible, onClose }) => {
                     </div>
                     <div className="checkout-btn-container">
                         <Link to="/checkOut">
-                            <button className="checkout-btn">Ir al Checkout</button>
+                            <button className="checkout-btn">Finalizar Compra</button>
                         </Link>
                     </div>
                 </>
