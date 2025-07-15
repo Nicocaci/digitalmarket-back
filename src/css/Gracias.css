@@ -4,7 +4,7 @@
   align-items: center;
   padding: 3rem 1rem;
   min-height: 100vh;
-  background-color: #f7f7f7;
+  background-color: rgb(135, 128, 163);
   
 }
 
@@ -16,10 +16,11 @@
   max-width: 600px;
   width: 100%;
   text-align: center;
+  border: 2px solid #ff7d12;
 }
 
 .gracias-card h2 {
-  color: #2ecc71;
+  color: #ff7d12;
   font-size: 1.8rem;
   margin-bottom: 1rem;
 }
@@ -52,24 +53,19 @@
   font-size: 0.95rem;
 }
 
-.gracias-resumen h4 {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: #000;
-}
-
 .gracias-boton {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
-  background-color: #3498db;
+  background-color: #ff7d12;
   color: white;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .gracias-boton:hover {
-  background-color: #2980b9;
+  background-color: #1c24a2;
+  color: white;
+  transition: 1s;
 }

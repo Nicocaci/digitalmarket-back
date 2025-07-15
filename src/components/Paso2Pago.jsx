@@ -35,7 +35,7 @@ const Paso2Pago = ({ formData, updateFormData, nextStep, prevStep }) => {
         Mercado Pago
       </label>
 
-      <div className="checkout-buttons">
+      <div className="btn-checkout">
         <button type="button" onClick={prevStep}>Atrás</button>
         <button type="submit">Siguiente</button>
       </div>

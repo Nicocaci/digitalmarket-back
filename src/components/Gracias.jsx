@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion'; // ← importamos Framer Motion
 import '../css/Gracias.css';
 
+
 const Gracias = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ const Gracias = () => {
                 className="gracias-card"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
+                transition={{ duration: 2, ease: 'easeOut' }}
             >
                 <h2>¡Gracias por tu compra, {orden.nombre}!</h2>
                 <p>Te enviamos un correo a <strong>{orden.email}</strong> con los detalles del pedido.</p>
@@ -36,7 +37,7 @@ const Gracias = () => {
                             </li>
                         ))}
                     </ul>
-                    <h4>Total: ${orden.total.toFixed(2)}</h4>
+                    <h4 className='font-total'>Total: ${orden.total.toFixed(2)}</h4>
                 </div>
 
                 <button className="gracias-boton" onClick={() => navigate('/')}>

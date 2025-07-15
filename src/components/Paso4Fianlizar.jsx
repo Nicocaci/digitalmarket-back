@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext.jsx';
 import { useNavigate } from 'react-router-dom';
 
 const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 
 const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
   const { clearCart } = useCart();
@@ -16,21 +17,21 @@ const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
 
     try {
       // 1. Crear orden en tu base de datos
-await axios.post(`${apiUrl}/orders/crear-orden`, {
-  nombre: formData.nombre,
-  email: formData.email,
-  direccion: formData.direccion,
-  metodoPago: formData.metodoPago,
-  productos: cart.map(item => ({
-    productId: item._id || item.product._id,
-    nombre: item.product.nombre,
-    precio: item.product.precio,
-    quantity: item.quantity
-  })),
-  total
-}, {
-  withCredentials: true // 👈 ESTO ES LO QUE FALTABA
-});
+      await axios.post(`${apiUrl}/orders/crear-orden`, {
+        nombre: formData.nombre,
+        email: formData.email,
+        direccion: formData.direccion,
+        metodoPago: formData.metodoPago,
+        productos: cart.map(item => ({
+          productId: item._id || item.product._id,
+          nombre: item.product.nombre,
+          precio: item.product.precio,
+          quantity: item.quantity
+        })),
+        total
+      }, {
+        withCredentials: true // 👈 ESTO ES LO QUE FALTABA
+      });
 
 
       if (formData.metodoPago === 'mercado_pago') {
@@ -78,17 +79,18 @@ await axios.post(`${apiUrl}/orders/crear-orden`, {
       <p><strong>Dirección:</strong> {formData.direccion}</p>
       <p><strong>Método de Pago:</strong> {formData.metodoPago === 'mercado_pago' ? 'Mercado Pago' : 'Efectivo'}</p>
 
-      <ul>
+      <ul className="li-none">
         {cart.map(item => (
-          <li key={item._id}>
-            {item.product.nombre} x{item.quantity} - ${item.product.precio * item.quantity}
+          <li key={item._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <img src={`${apiUrlUD}/uploads/${item.product.imagen}`} alt={item.product?.nombre} style = {{ width: '60px', height: '60px', objectFit: 'cover', marginRight: '10px', borderRadius: '8px' }} />
+            <span>{item.product.nombre} x{item.quantity} - ${item.product.precio * item.quantity}</span>
           </li>
         ))}
       </ul>
 
-      <h4>Total: ${total.toFixed(2)}</h4>
+      <h4 className='font-total' >Total: ${total.toFixed(2)}</h4>
 
-      <div className="checkout-buttons">
+      <div className="btn-checkout">
         <button onClick={prevStep}>Atrás</button>
         <button onClick={handleConfirmarCompra}>Confirmar y {formData.metodoPago === 'mercado_pago' ? 'Pagar' : 'Finalizar'}</button>
       </div>
@@ -97,3 +99,4 @@ await axios.post(`${apiUrl}/orders/crear-orden`, {
 };
 
 export default Paso4Finalizar;
+

@@ -2,9 +2,10 @@
   width: 35%;
   margin: 2rem auto;
   padding: 1rem;
-  background: #f5f5f5;
+  background-color: rgb(135, 128, 163);
   border-radius: 10px;
   margin-top: 10%;
+  margin-bottom: 10%;
 }
 
 .checkout-section {
@@ -20,8 +21,8 @@
 }
 
 .checkout-form button {
-  background-color: #28a745;
-  color: white;
+  background-color: #ff7d12;
+  color: black;
   padding: 10px;
   width: 100%;
   border: none;
@@ -30,7 +31,9 @@
 }
 
 .checkout-form button:hover {
-  background-color: #218838;
+  background-color: #1c24a2;
+  color: white;
+  transition: 1s;
 }
 
 .radio-option {
@@ -45,6 +48,11 @@
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
+}
+
+.titulo-checkout{
+  color: white;
+  font-weight: 900;
 }
 
 @media (max-width: 575px){

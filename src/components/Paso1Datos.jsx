@@ -12,8 +12,8 @@ const Paso1Datos = ({ formData, updateFormData, nextStep }) => {
 
   return (
     <form onSubmit={handleNext} className="checkout-form">
-      <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required />
-      <input type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} required />
+      <input className="input-100" type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} required />
+      <input className="input-100" type="email" name="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} required />
       <button type="submit">Siguiente</button>
     </form>
   );
