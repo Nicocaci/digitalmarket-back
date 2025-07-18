@@ -13,7 +13,7 @@
 }
 
 /* Contenedor del modal */
-.modal-content {
+.modal-content-user {
   background-color: white;
   padding: 20px 30px;
   border-radius: 10px;
@@ -21,6 +21,7 @@
   max-width: 400px;
   position: relative;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid #ff7d12;
 }
 
 /* Botón de cerrar */
@@ -35,14 +36,23 @@
 }
 
 /* Inputs y etiquetas */
+
+/* .grid-form{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+} */
 .form-group {
   margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
 }
 
 .form-group label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #ff7d12;
 }
 
 .form-group input {
@@ -51,28 +61,34 @@
   border-radius: 5px;
   border: 1px solid #ccc;
 }
-
+.title-user{
+  color: #1c25a2;
+}
 /* Botón submit */
 .submit-btn {
   width: 100%;
   padding: 10px;
-  background-color: #0077cc;
-  color: white;
+  background-color: #ff7d12;
+  color: black;
   border: none;
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 700;
+}
+.submit-btn:hover{
+  background-color: #1c25a2;
+  color: white;
+  transition: 1s;
 }
 
-.submit-btn:hover {
-  background-color: #005fa3;
-}
 
 /* AuthModal.css */
 .link-btn {
   background: none;
   border: none;
-  color: #007bff;
+  color: #ff7d12;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: underline;
   font-size: 0.9rem;

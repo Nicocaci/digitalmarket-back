@@ -69,4 +69,18 @@
     .seccion-contacto{
     margin-top: 30%;
 }
+.contactoData{
+    margin-top: 5%;
+}
+
+.formulario-contacto {
+    align-items: center;
+}
+.formulario-contacto input,
+.formulario-contacto textarea{
+    width: 80%;
+}
+.formulario-contacto button{
+    width: 80%;
+}
 }

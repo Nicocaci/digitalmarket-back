@@ -11,7 +11,7 @@ const CrearProducto = () => {
         categoria: "",
         imagen: "",
         precio: "",
-        stock: "",
+        descripcion: "",
     });
 
     const [fileNames, setFileNames] = useState([]); // para mostrar los nombres
@@ -36,8 +36,8 @@ const CrearProducto = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         Swal.fire({
-            title: "¿Confirmar subasta?",
-            text: "¿Estás seguro de que deseas crear esta subasta?",
+            title: "¿Confirmar producto?",
+            text: "¿Estás seguro de que deseas crear este producto?",
             icon: "question",
             showCancelButton: true,
             confirmButtonText: "Sí, crear",
@@ -51,7 +51,7 @@ const CrearProducto = () => {
                     formDataToSend.append("imagen", file);
                 });
                 formDataToSend.append("precio", formData.precio);
-                formDataToSend.append("stock", formData.stock);
+                formDataToSend.append("descripcion", formData.descripcion);
 
                 try {
                     await axios.post(`${apiUrl}/productos`,
@@ -59,8 +59,8 @@ const CrearProducto = () => {
                         { headers: { "Content-type": "multipart/form-data" } }
                     );
                     Swal.fire({
-                        title: "Subasta creada",
-                        text: "¡Tu subasta ha sido publicada con éxito!",
+                        title: "Producto creado",
+                        text: "¡Tu Producto fue creado con éxito!",
                         icon: "success",
                         timer: 2000,
                         showConfirmButton: false,
@@ -71,14 +71,14 @@ const CrearProducto = () => {
                         categoria: "",
                         imagen: "",
                         precio: "",
-                        stock: "",
+                        descripcion: "",
                     });
                     setFileNames([]);
                 } catch (error) {
                     console.error("Error:", error);
                     Swal.fire({
                         title: "Error",
-                        text: "Hubo un problema al crear la subasta",
+                        text: "Hubo un problema al crear el producto",
                         icon: "error",
                         confirmButtonText: "OK",
                     });
@@ -106,6 +106,15 @@ const CrearProducto = () => {
                     className='input-crear'
                     placeholder='Categoría del producto'
                     value={formData.categoria}
+                    onChange={handleChange}
+                    required />
+                
+                <input
+                    type="text"
+                    name='descripcion'
+                    className='input-crear'
+                    placeholder='Nota'
+                    value={formData.descripcion}
                     onChange={handleChange}
                     required />
             </div>

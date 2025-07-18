@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useCart } from '../context/CartContext.jsx';
 import '../css/CartDropdown.css';
-import { useEffect, useState } from 'react';
 import CartItem from './CartItem';
-import CheckOut from './CheckOut';
 import { Link } from 'react-router-dom';
-
 
 const CartDropdown = ({ visible, onClose }) => {
     const { cart, total, removeProductFromCart } = useCart();
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                onClose(); // Cierra si se hace clic fuera del dropdown
+            }
+        };
+
+        if (visible) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [visible, onClose]);
 
     return (
-        <div className={`cart-dropdown ${visible ? "visible" : ""}`}>
+        <div ref={dropdownRef} className={`cart-dropdown ${visible ? "visible" : ""}`}>
             <div className="cart-header">
                 <h3>Tu Carrito</h3>
                 <button className="close-btn" onClick={onClose}>

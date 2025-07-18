@@ -50,14 +50,15 @@ const ItemDetail = () => {
                     ← Volver a Productos
                 </button>
                 <div className='card-detail-container'>
-                    <div>
+                    <div className='img-container'>
                         <img className='img-detalle' src={`${apiUrlUD}/uploads/${producto.imagen[0]}`} alt={producto.nombre} />
                     </div>
                     <div className='card-detail'>
                         <h2>{producto.nombre}</h2>
                         <p><strong>SKU:</strong> {producto._id}</p>
-                        <p><strong>Precio:</strong> ${producto.precio}</p>
+                        <p><strong>Precio por KG:</strong> ${(producto.precio * 1.305).toFixed(2)}</p>
                         <p><strong>Categoría:</strong> {producto.categoria}</p>
+                        <p><strong>Nota:</strong> {producto.descripcion}</p>
                         <p className='cantidad'>Cantidad</p>
                         <div className="cantidad-container">
                             <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) - 1)}>-</button>

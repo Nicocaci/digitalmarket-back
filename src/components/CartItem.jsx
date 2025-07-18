@@ -11,12 +11,11 @@ const CartItem = ({ item, removeProductFromCart }) => {
     };
     return (
         <li key={item._id} className="cart-item">
-            <img src={`${apiUrlUD}/uploads/${item.product.imagen}`} alt={item.product?.nombre} />
+            <img src={`${apiUrlUD}/uploads/${item.product?.imagen}`} alt={item.product?.nombre} />
             <div className="details">
                 <h4>{item.product?.nombre}</h4>
                 <p>Cantidad: {item.quantity}</p>
                 <p>$ {item.product?.precio}</p>
-
                 <select
                     value={qtyToRemove}
                     onChange={(e) => setQtyToRemove(Number(e.target.value))}

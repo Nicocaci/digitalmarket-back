@@ -100,7 +100,7 @@ const ProductoDestacado = () => {
                         {productos.map((prod) => (
                             <SwiperSlide key={prod._id}>
                                 <Link key={prod._id} to={`/productos/${prod._id}`} className="card-link" >
-                                <div className="card">
+                                <div className="card-inicio">
                                     <img src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
                                     <div className="card-content">
                                         <h1>{prod.nombre}</h1>

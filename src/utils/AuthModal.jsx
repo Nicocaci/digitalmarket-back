@@ -30,14 +30,14 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
       type === 'login'
         ? { email: formData.email, contraseña: formData.contraseña }
         : {
-            nombre: formData.nombre,
-            apellido: formData.apellido,
-            dni: formData.dni,
-            direccion: formData.direccion,
-            email: formData.email,
-            contraseña: formData.contraseña,
-            role: 'user',
-          };
+          nombre: formData.nombre,
+          apellido: formData.apellido,
+          dni: formData.dni,
+          direccion: formData.direccion,
+          email: formData.email,
+          contraseña: formData.contraseña,
+          role: 'user',
+        };
 
     try {
       const response = await axios.post(endpoint, payload, {
@@ -77,32 +77,36 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-content-user">
         <button className="close-btn" onClick={onClose}>×</button>
-        <h2>{type === 'login' ? 'Iniciar sesión' : 'Registrarse'}</h2>
+        <h2 className='title-user'>{type === 'login' ? 'Iniciar sesión' : 'Registrarse'}</h2>
 
         <form onSubmit={handleSubmit}>
           {type === 'register' && (
             <>
-              <div className="form-group">
-                <label>Nombre:</label>
-                <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
-              </div>
-              <div className="form-group">
-                <label>Apellido:</label>
-                <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} required />
-              </div>
-              <div className="form-group">
-                <label>DNI:</label>
-                <input type="text" name="dni" value={formData.dni} onChange={handleChange} required />
-              </div>
-              <div className="form-group">
-                <label>Dirección:</label>
-                <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} required />
+              <div className='grid-form'>
+                <div className="form-group">
+                  <label>Nombre:</label>
+                  <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
+                </div>
+                <div className="form-group">
+                  <label>Apellido:</label>
+                  <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} required />
+                </div>
+                <div className="form-group ">
+                  <label>DNI:</label>
+                  <input type="text" name="dni" value={formData.dni} onChange={handleChange} required />
+                </div>
+                <div className="form-group  ">
+                  <label>Dirección:</label>
+                  <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} required />
+                </div>
               </div>
             </>
+
           )}
 
+          <div className='grid-form'>
           <div className="form-group">
             <label>Email:</label>
             <input type="email" name="email" value={formData.email} onChange={handleChange} required />
@@ -119,7 +123,7 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
               <input type="password" name="confirmar" value={formData.confirmar} onChange={handleChange} required />
             </div>
           )}
-
+        </div>
           <button type="submit" className="submit-btn">
             {type === 'login' ? 'Ingresar' : 'Registrarme'}
           </button>

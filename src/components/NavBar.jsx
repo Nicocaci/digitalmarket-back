@@ -141,6 +141,7 @@ const NavBar = () => {
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         type={authType}
+        setType={setAuthType}
       />
     </div>
   );

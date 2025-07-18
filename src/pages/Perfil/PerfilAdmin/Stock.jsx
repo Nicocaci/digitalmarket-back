@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../../css/Perfil/Stock.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
@@ -8,10 +9,9 @@ const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 const Stock = () => {
     const [productos, setProductos] = useState([]);
     const [productoEditando, setProductoEditando] = useState(null);
-    const [form, setForm] = useState({ nombre: '', categoria: '', precio: '', stock: '' });
+    const [form, setForm] = useState({ nombre: '', categoria: '', precio: '', descripcion: '' });
     const [filtroNombre, setFiltroNombre] = useState('');
     const [filtroCategoria, setFiltroCategoria] = useState('');
-
 
     useEffect(() => {
         fetchProductos();
@@ -37,9 +37,44 @@ const Stock = () => {
             nombre: producto.nombre,
             categoria: producto.categoria,
             precio: producto.precio,
-            stock: producto.stock
+            descripcion: producto.descripcion
         });
     };
+
+const handleEliminar = async (id) => {
+    const resultado = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción eliminará el producto de forma permanente.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    });
+
+    if (resultado.isConfirmed) {
+        try {
+            await axios.delete(`${apiUrl}/productos/${id}`);
+            await fetchProductos();
+
+            Swal.fire({
+                title: 'Eliminado',
+                text: 'El producto fue eliminado exitosamente.',
+                icon: 'success',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error("Error al eliminar el producto", error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al eliminar el producto.',
+                icon: 'error'
+            });
+        }
+    }
+};
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -49,7 +84,7 @@ const Stock = () => {
         try {
             await axios.put(`${apiUrl}/productos/${productoEditando}`, form);
             setProductoEditando(null);
-            await fetchProductos(); // Recargar productos
+            await fetchProductos();
         } catch (error) {
             console.error("Error al actualizar el producto", error);
         }
@@ -88,7 +123,7 @@ const Stock = () => {
                             <th>Nombre</th>
                             <th>Categoria</th>
                             <th>Precio</th>
-                            <th>Stock</th>
+                            <th>Nota</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -107,18 +142,17 @@ const Stock = () => {
                                     <td>{prod.nombre}</td>
                                     <td>{prod.categoria}</td>
                                     <td>${prod.precio}</td>
-                                    <td>{prod.stock}</td>
+                                    <td>{prod.descripcion}</td>
                                     <td>
                                         <button className='btn-stock' onClick={() => handleEditarClick(prod)}>Editar</button>
+                                        <button className='btn-eliminar-stock' onClick={() => handleEliminar(prod._id)}>Eliminar</button>
                                     </td>
                                 </tr>
                             ))}
-
                     </tbody>
                 </table>
             </div>
 
-            {/* Modal simple para editar producto */}
             {productoEditando && (
                 <div className="modal-editar">
                     <div className="modal-content">
@@ -132,8 +166,8 @@ const Stock = () => {
                         <label>Precio:
                             <input className='input-stock' type="number" name="precio" value={form.precio} onChange={handleChange} />
                         </label>
-                        <label>Stock:
-                            <input className='input-stock' type="number" name="stock" value={form.stock} onChange={handleChange} />
+                        <label>Descripcion:
+                            <input className='input-stock' name="descripcion" value={form.descripcion} onChange={handleChange} />
                         </label>
                         <div className="modal-buttons">
                             <button className='btn-guardar-stock' onClick={handleGuardar}>Guardar</button>

@@ -92,6 +92,7 @@
 .btn-stock:hover {
     background-color: #1c24a2;
     color: white;
+    transition: 1s;
 }
 
 .input-stock {
@@ -132,6 +133,27 @@
 .btn-cancelar-stock:hover{
     background-color: #1c24a2;
     color: white;
+    transition: 1s;
+}
+
+.btn-eliminar-stock {
+    background: #1c24a2;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 2%;
+    height: 30px;
+    border-radius: 6px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+}
+
+.btn-eliminar-stock:hover {
+    background-color: #ff7d12;
+    color: black;
     transition: 1s;
 }
 @media (max-width: 575px) {

@@ -155,3 +155,8 @@
         height: 80px;
     }
 }
+@media (max-width: 350px) {
+    .login-button{
+        font-size: 12px;
+    }
+}

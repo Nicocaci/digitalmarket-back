@@ -194,10 +194,26 @@ select {
     width: 100%;
 }
 
+.card-inicio{
+    background-color: #fff;
+    border: 1px solid #1c24a2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    width: 70%;
+}
+
+.card-inicio img {
+    width: 100%;
+    height: 20vh;
+    border-bottom: 2px solid #eee;
+}
+
 .card img {
     width: 100%;
     height: 20vh;
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #eee;
 }
 
 .card-content {
@@ -282,6 +298,10 @@ select {
     .card {
         width: 100%;
         height: 100%;
+        margin: auto;
+    }
+    .card-content h1{
+        font-size: 12px;
     }
 
     .filter1 {
@@ -306,5 +326,28 @@ select {
     .card-content .price{
         font-size: 20px;
     }
-
 }
+
+@media (max-width: 350px) {
+    .card{
+        width: 90%;
+    }
+    .card-content h1 {
+        height: 20px;
+    }
+    .card img {
+        height: 40vh;
+    }
+    .contenido-inicio h1{
+        font-size: 40px;
+        margin-top: 10px;
+    }
+        .contenido-inicio p {
+            font-size: 16px;
+    }
+    .btn-inicio {
+        font-size: 0.8rem;
+    }
+    
+}
+    
