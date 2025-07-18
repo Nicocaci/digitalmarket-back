@@ -9,6 +9,17 @@ const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
   const { clearCart } = useCart();
   const navigate = useNavigate();
 
+  const cartConRecargo = cart.map(item => {
+    const precioConRecargo = item.product.precio * 1.305;
+    return {
+      ...item,
+      precioConRecargo,
+      subtotal: precioConRecargo * item.quantity
+    };
+  });
+
+  const totalConRecargo = cartConRecargo.reduce((acc, item) => acc + item.subtotal, 0);
+
   const handleConfirmarCompra = async () => {
     if (cart.length === 0) {
       alert('Tu carrito está vacío.');
@@ -16,34 +27,34 @@ const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
     }
 
     try {
-      // 1. Crear orden en tu base de datos
+      // Crear orden en tu base de datos
       await axios.post(`${apiUrl}/orders/crear-orden`, {
         nombre: formData.nombre,
         email: formData.email,
+        telefono: formData.telefono,
         direccion: formData.direccion,
         metodoPago: formData.metodoPago,
-        productos: cart.map(item => ({
+        productos: cartConRecargo.map(item => ({
           productId: item._id || item.product._id,
           nombre: item.product.nombre,
-          precio: item.product.precio,
+          precio: item.precioConRecargo,
           quantity: item.quantity
         })),
-        total
+        total: totalConRecargo
       }, {
-        withCredentials: true // 👈 ESTO ES LO QUE FALTABA
+        withCredentials: true
       });
 
-
       if (formData.metodoPago === 'mercado_pago') {
-        // 2. Crear preferencia en Mercado Pago
         const mercadoPagoResponse = await axios.post(`${apiUrl}/mercado-pago/crear-orden`, {
-          productos: cart.map(item => ({
+          productos: cartConRecargo.map(item => ({
             nombre: item.product.nombre,
-            precio: item.product.precio,
+            precio: item.precioConRecargo,
             quantity: item.quantity
           })),
           nombre: formData.nombre,
-          email: formData.email
+          email: formData.email,
+          telefono: formData.telefono
         });
 
         window.location.href = mercadoPagoResponse.data.init_point;
@@ -51,17 +62,17 @@ const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
         const nuevaOrden = {
           nombre: formData.nombre,
           email: formData.email,
+          telefono: formData.telefono,
           direccion: formData.direccion,
           metodoPago: formData.metodoPago,
-          productos: cart.map(item => ({
+          productos: cartConRecargo.map(item => ({
             nombre: item.product.nombre,
-            precio: item.product.precio,
+            precio: item.precioConRecargo,
             quantity: item.quantity
           })),
-          total
+          total: totalConRecargo
         };
 
-        // 3. Compra en efectivo: redirigimos al "gracias"
         clearCart();
         navigate('/gracias', { state: { orden: nuevaOrden } });
       }
@@ -76,27 +87,29 @@ const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
       <h3>Resumen Final</h3>
       <p><strong>Nombre:</strong> {formData.nombre}</p>
       <p><strong>Email:</strong> {formData.email}</p>
+      <p><strong>Teléfono:</strong> {formData.telefono}</p>
       <p><strong>Dirección:</strong> {formData.direccion}</p>
       <p><strong>Método de Pago:</strong> {formData.metodoPago === 'mercado_pago' ? 'Mercado Pago' : 'Efectivo'}</p>
 
       <ul className="li-none">
-        {cart.map(item => (
+        {cartConRecargo.map(item => (
           <li key={item._id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
             <img src={`${apiUrlUD}/uploads/${item.product.imagen}`} alt={item.product?.nombre} style = {{ width: '60px', height: '60px', objectFit: 'cover', marginRight: '10px', borderRadius: '8px' }} />
-            <span>{item.product.nombre} x{item.quantity} - ${item.product.precio * item.quantity}</span>
+            <span>{item.product.nombre} x{item.quantity} - ${item.subtotal.toFixed(2)}</span>
           </li>
         ))}
       </ul>
 
-      <h4 className='font-total' >Total: ${total.toFixed(2)}</h4>
+      <h4 className='font-total'>Total: ${totalConRecargo.toFixed(2)}</h4>
 
       <div className="btn-checkout">
         <button onClick={prevStep}>Atrás</button>
-        <button onClick={handleConfirmarCompra}>Confirmar y {formData.metodoPago === 'mercado_pago' ? 'Pagar' : 'Finalizar'}</button>
+        <button onClick={handleConfirmarCompra}>
+          Confirmar y {formData.metodoPago === 'mercado_pago' ? 'Pagar' : 'Finalizar'}
+        </button>
       </div>
     </div>
   );
 };
 
 export default Paso4Finalizar;
-

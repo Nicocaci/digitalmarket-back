@@ -15,6 +15,7 @@ const CheckOut = () => {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         nombre: '',
+        telefono:'',
         email: '',
         direccion: '',
         metodoPago: ''

@@ -223,7 +223,7 @@ select {
 }
 
 .card-content h1 {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #1c24a2;
     font-family: "Poppins", sans-serif;
     font-weight: 800;
@@ -242,7 +242,7 @@ select {
 }
 
 .card-content .price {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #ff7d12;
     margin: 5px 0;
     font-family: "Poppins", sans-serif;
@@ -300,8 +300,12 @@ select {
         height: 100%;
         margin: auto;
     }
+    .card-content{
+        padding: 0;
+    }
     .card-content h1{
-        font-size: 12px;
+        font-size: 0.6rem;
+        height: 50px;
     }
 
     .filter1 {
@@ -326,6 +330,9 @@ select {
     .card-content .price{
         font-size: 20px;
     }
+    .card-inicio{
+        width: 100%;
+    }
 }
 
 @media (max-width: 350px) {
@@ -342,7 +349,7 @@ select {
         font-size: 40px;
         margin-top: 10px;
     }
-        .contenido-inicio p {
+    .contenido-inicio p {
             font-size: 16px;
     }
     .btn-inicio {

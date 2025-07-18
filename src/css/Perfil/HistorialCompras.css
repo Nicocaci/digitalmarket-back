@@ -28,11 +28,10 @@
 .tabla-compras th,
 .tabla-compras td {
     border: 1px solid #ff7d12;
-    padding: 8px;
-    text-align: left;
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
+  padding: 10px 8px;
+  font-size: 14px;
+  min-width: 100px; /* Esto fuerza más espacio */
+  text-align: center;
 }
 
 .tabla-compras th {
@@ -95,9 +94,10 @@
     .historial-container{
         width: 100%;
     }
-
-    .tabla-compras{
-        font-size: 8px;
-        margin-left: -25px;
-    }
+  .tabla-compras th,
+  .tabla-compras td {
+    padding: 12px 10px;
+    font-size: 16px;
+    min-width: 120px;
+  }
 }

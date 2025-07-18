@@ -47,11 +47,11 @@ const CartDropdown = ({ visible, onClose }) => {
                         ))}
                     </ul>
                     <div className="cart-total">
-                        <h4>Total: $ {total.toFixed(2)}</h4>
+                        <h4>Total: $ {(total * 1.305).toFixed(2)}</h4>
                     </div>
                     <div className="checkout-btn-container">
                         <Link to="/checkOut">
-                            <button className="checkout-btn">Finalizar Compra</button>
+                            <button className="checkout-btn" onClick={onClose}>Finalizar Compra</button>
                         </Link>
                     </div>
                 </>

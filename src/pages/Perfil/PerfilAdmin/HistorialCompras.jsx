@@ -66,6 +66,7 @@ const HistorialCompras = () => {
                             <th>#</th>
                             <th>Cliente</th>
                             <th>Email</th>
+                            <th>Teléfono</th>
                             <th>Dirección</th>
                             <th>Fecha</th>
                             <th>Total</th>
@@ -81,6 +82,7 @@ const HistorialCompras = () => {
                                     <td>{index + 1}</td>
                                     <td>{orden.nombre}</td>
                                     <td>{orden.email}</td>
+                                    <td>{orden.telefono || '-'}</td>
                                     <td>{orden.direccion}</td>
                                     <td>{new Date(orden.fecha).toLocaleDateString()}</td>
                                     <td>${orden.total.toFixed(2)}</td>

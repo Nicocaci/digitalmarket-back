@@ -41,13 +41,8 @@ const Productos = () => {
     return (
         <div className="page-productos">
             <h1 className="titulo-productos">Productos</h1>
-
             {/* Botón visible solo en móviles */}
-            <button className="btn-filtros-movil" onClick={() => setMostrarFiltros(true)}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-right" viewBox="0 0 16 16">
-                    <path d="M14 10.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0 0 1h7a.5.5 0 0 0 .5-.5m0-3a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0 0 1h11a.5.5 0 0 0 .5-.5" />
-                </svg>
-            </button>
+
 
             {/* Panel lateral */}
             <div className={`sidebar-filtros panel-deslizable ${mostrarFiltros ? 'mostrar' : ''}`}>
@@ -87,6 +82,9 @@ const Productos = () => {
             </div>
 
             <div className="productos-layout">
+                <button className="btn-filtros-movil" onClick={() => setMostrarFiltros(true)}>
+                    <h4>Filtrar Por:</h4>
+                </button>
                 {/* Sidebar fija en desktop */}
                 <aside className="sidebar-filtros desktop-only">
                     <input

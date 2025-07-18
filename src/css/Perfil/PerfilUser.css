@@ -15,7 +15,7 @@
     font-size: 2rem;
     height: 200px;
     width: 100%;
-    margin-top: 8%;
+    margin-top: 6%;
 }
 
 .seccion-form{
@@ -113,7 +113,7 @@
 
 @media (max-width: 575px) {
     .titulo-user{
-    margin-top: 40%;
+    margin-top: 20%;
     }
     .seccion-form{
         width: 98%;

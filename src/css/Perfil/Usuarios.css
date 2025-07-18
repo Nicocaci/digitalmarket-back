@@ -14,15 +14,13 @@
     overflow-x: auto;
 }
 .filtros-usuarios {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1rem;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
 }
 
 .input-filtro {
   padding: 8px 12px;
-  border: 1px solid #1c24a2;
+  border: 1px solid #ff7d12;
   border-radius: 5px;
   font-size: 1rem;
   min-width: 200px;

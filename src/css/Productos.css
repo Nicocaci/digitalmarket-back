@@ -39,7 +39,7 @@
 
 .precio {
     color: #ff7d12;
-    margin-top: 30px;
+    font-size: 1.3rem;
 }
 
 .card-link {
@@ -148,15 +148,13 @@
 /* Botón de filtros visible solo en móviles */
 .btn-filtros-movil {
     display: none;
-    margin: 1rem;
+    margin: auto;
     padding: 10px 20px;
     background-color: #ff7d12ad;
     color: black;
     border: none;
     border-radius: 5px;
-    position: absolute;
-    right: 0;
-    top: 45%;
+    width: 40%;
 }
 
 /* Panel deslizable para móvil */
@@ -200,6 +198,7 @@
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
         padding: 50px;
+        border-radius: 0;
     }
 
     .filtro-busqueda {
@@ -218,6 +217,7 @@
 
     .productos-layout {
         flex-direction: column;
+        gap: 0;
     }
 
     .sidebar-filtros {
@@ -232,10 +232,14 @@
 
     .btn-filtros-movil {
         display: block;
-        top: 55%;
+        width: 100%;
     }
     .precio{
         font-size: 15px;
+        margin-top: 0;
+    }
+    .titulo-productos{
+        margin-bottom: 0;
     }
 
 }

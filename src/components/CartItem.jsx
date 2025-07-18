@@ -15,7 +15,7 @@ const CartItem = ({ item, removeProductFromCart }) => {
             <div className="details">
                 <h4>{item.product?.nombre}</h4>
                 <p>Cantidad: {item.quantity}</p>
-                <p>$ {item.product?.precio}</p>
+                <p>$ {(item.product?.precio * 1.305).toFixed(2)}</p>
                 <select
                     value={qtyToRemove}
                     onChange={(e) => setQtyToRemove(Number(e.target.value))}
