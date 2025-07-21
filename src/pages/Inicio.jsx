@@ -14,11 +14,20 @@ const Inicio = () => {
     return (
         <section className='inicio'>
             <div className='seccion-inicio'>
-                <video src="/videoHome.mp4" autoPlay muted loop className="mi-video" />
+                <video
+                    src="/videoHome.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    disablePictureInPicture
+                    controls={false}
+                    className="mi-video"
+                />
                 <div className="contenido-inicio">
                     <h1>DIGITALSHOP</h1>
                     <p>Tu tienda de confianza online</p>
-                    
+
                     <Link to={"/productos"}><button className="btn-inicio">Ver Productos</button></Link>
                 </div>
             </div>
