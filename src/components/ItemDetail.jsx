@@ -60,7 +60,7 @@ const ItemDetail = () => {
                         <p><strong>Precio por KG MAYORISTA:</strong> ${(producto.precio * 1.205).toFixed(2)}</p>
                         <p><strong>Categoría:</strong> {producto.categoria}</p>
                         <p><strong>Nota:</strong> {producto.descripcion}</p>
-                        <p className='cantidad'>Cantidad</p>
+                        <p className='cantidad'>Cantidad de KG</p>
                         <div className="cantidad-container">
                             <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) - 1)}>-</button>
                             <span>{cantidades[producto._id] || 1}</span>
