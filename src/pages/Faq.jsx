@@ -4,7 +4,7 @@ import '../css/ComoComprar.css'
 const Nosotros = () => {
   return (
     <div className='seccion-faq'>
-        <h1 className='titulo-faq'>Preguntas Frecuentes</h1>
+      <h1 className='titulo-faq'>Preguntas Frecuentes</h1>
       <div className='seccion-como-comprar'>
         <div className=' center titulo-container'>
           <h2 className='tituloComprar'>¿Como Comprar?</h2>
@@ -34,6 +34,16 @@ const Nosotros = () => {
           </div>
         </div>
       </div>
+          <div className='seccion-envio'>
+        <div className=' center titulo-container'>
+          <h2 className='tituloComprar'>Precios Mayorista</h2>
+        </div>
+        <div className='seccion-envio2'>
+          <p className='textofaq'>Los precios mayoristas se aplican automáticamente en el carrito al alcanzar un total de 10 kg en productos.
+            No es necesario que sean 10 kg del mismo artículo: se suman los kilogramos de todos los productos seleccionados.
+            Si tenés alguna duda sobre los precios mayoristas o necesitás asistencia, no dudes en contactarnos. Estamos para ayudarte.</p>
+        </div>
+      </div>
       <div className='seccion-envio'>
         <div className='titulo-container center '>
           <h2 className='tituloComprar'>¿Cuales son las formas de envio?</h2>
@@ -56,10 +66,11 @@ const Nosotros = () => {
         <div className=' center titulo-container'>
           <h2 className='tituloComprar'>¿Cuales son las formas de pago?</h2>
         </div>
-        <div  className='seccion-envio2'>
+        <div className='seccion-envio2'>
           <p className='textofaq'>Podés abonar al momento de recibir tu compra en efectivo o MercadoPago. También podés solicitar recibir un botón de pago electrónico una vez que facturemos tu pedido, con este podrás abonar en MercadoPago con cualquier tarjeta, sin necesidad de que el titular esté presente al momento de recibir la compra. Te recordamos que pueden existir pequeñas diferencias entre el valor indicado al finalizar la compra y el valor facturado, debido a variaciones de peso en los productos pesable o faltante de stock. Comprá online y recibí tu pedido a domicilio.</p>
         </div>
       </div>
+
     </div>
   )
 }

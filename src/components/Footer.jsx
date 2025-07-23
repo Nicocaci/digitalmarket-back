@@ -37,6 +37,7 @@ const Footer = () => {
                     <ul className='footer'>
                         <h2 className='titulo-footer center'>Ayuda</h2>
                         <li className='footer-content'><a href="/faq">Cómo Comprar?</a></li>
+                        <li className='footer-content'><a href="/faq#mayoristas">PRECIOS MAYORITAS</a></li>
                         <li className='footer-content'><a href="/faq">Formas de Envío</a></li>
                         <li className='footer-content'><a href="/contacto">Contacto</a></li>
                     </ul>

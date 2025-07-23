@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import CartDropdown from './CartDropdown';
 import AuthModal from '../utils/AuthModal';
+import Swal from 'sweetalert2';
 import axios from 'axios';
 const apiUrl = import.meta.env.VITE_API_URL;
 import LogoAnimado from '../utils/LogoAnimado';
@@ -59,16 +60,44 @@ const NavBar = () => {
     setMobileMenuOpen(false); // cerrar menú en móviles
   };
 
-  const handleLogout = async () => {
-    try {
-      await axios.post(`${apiUrl}/usuario/logout`, {}, { withCredentials: true });
-      localStorage.removeItem('token');
+
+const handleLogout = async () => {
+  try {
+    // Mostrar loader mientras se cierra sesión
+    Swal.fire({
+      title: 'Cerrando sesión...',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading(); // Muestra spinner
+      }
+    });
+
+    // Hacemos logout
+    await axios.post(`${apiUrl}/usuario/logout`, {}, { withCredentials: true });
+    localStorage.removeItem('token');
+
+    // Mostrar mensaje de éxito
+    Swal.fire({
+      icon: 'success',
+      title: 'Sesión cerrada',
+      text: 'Has cerrado sesión exitosamente.',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#ff7d12' // verde, por ejemplo
+    }).then(() => {
       window.location.href = '/';
-    } catch (error) {
-      console.error("Error en logout:", error);
-      alert("No se pudo cerrar sesión, intenta nuevamente.");
-    }
-  };
+    });
+
+  } catch (error) {
+    console.error("Error en logout:", error);
+
+    // Mostrar mensaje de error
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se pudo cerrar sesión, intenta nuevamente.',
+    });
+  }
+};
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -129,7 +158,7 @@ const NavBar = () => {
           <li><Link className='navBar-title' to="/" onClick={() => setMobileMenuOpen(false)}>Inicio</Link></li>
           <li><Link className='navBar-title' to="/productos" onClick={() => setMobileMenuOpen(false)}>Productos</Link></li>
           <li><Link className='navBar-title' to="/contacto" onClick={() => setMobileMenuOpen(false)}>Contacto</Link></li>
-          <li><Link className='navBar-title' to="/faq" onClick={() => setMobileMenuOpen(false)}>FAQ</Link></li>
+          <li><Link className='navBar-title' to="/faq" onClick={() => setMobileMenuOpen(false)}>Preguntas Frecuentes</Link></li>
           <li><Link className='navBar-title' to="/perfil" onClick={() => setMobileMenuOpen(false)}>Perfil</Link></li>
           {userData && (
             <li className='navBar-title saludo-usuario'>Bienvenido, {userData.nombre}</li>

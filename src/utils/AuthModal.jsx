@@ -48,7 +48,7 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
         icon: 'success',
         title: type === 'login' ? 'Bienvenido a DigitalShop' : 'Registro exitoso',
         text: response.data.message,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#ff7d12',
       }).then(() => {
         onClose();
         refreshCartContext();

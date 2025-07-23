@@ -1,5 +1,7 @@
 .seccion-detalle {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     margin-top: 10%;
     margin-bottom: 20%;
@@ -118,6 +120,14 @@
 .img-container{
     width: 80%;
 }
+
+.info-mayorista{
+    display: flex;
+    justify-content: start;
+}
+
+
+
 @media (max-width: 575px) {
     .seccion-detalle {
         margin-top: 50%;
@@ -134,6 +144,10 @@
     }
     .card-detail p{
         font-size: 12px;
+    }
+    .info-mayorista{
+        font-size: 0.8rem;
+        padding: 10px;
     }
 }
 

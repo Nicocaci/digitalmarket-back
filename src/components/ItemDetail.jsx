@@ -57,6 +57,7 @@ const ItemDetail = () => {
                         <h2>{producto.nombre}</h2>
                         <p><strong>SKU:</strong> {producto._id}</p>
                         <p><strong>Precio por KG:</strong> ${(producto.precio * 1.305).toFixed(2)}</p>
+                        <p><strong>Precio por KG MAYORISTA:</strong> ${(producto.precio * 1.205).toFixed(2)}</p>
                         <p><strong>Categoría:</strong> {producto.categoria}</p>
                         <p><strong>Nota:</strong> {producto.descripcion}</p>
                         <p className='cantidad'>Cantidad</p>
@@ -69,9 +70,12 @@ const ItemDetail = () => {
                         <button onClick={() => handleAddToCart(producto._id, 1)}>Añadir al carrito</button>
                     </div>
                 </div>
-
+            </div>
+            <div className='info-mayorista'>
+                    <p><strong>*PRECIO MAYORISTA: UNA VEZ QUE EL CARRITO ALCANZA LOS 10KG DE CUALQUIER PRODUCTO, EMPIEZA A CALCULAR PRECIO MAYORISTA </strong></p>
             </div>
         </div>
+        
     );
 };
 

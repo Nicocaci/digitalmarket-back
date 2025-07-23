@@ -120,7 +120,6 @@ const Productos = () => {
                                 <img src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
                                 <div className="card-content">
                                     <h1>{prod.nombre}</h1>
-                                    <h2 className="precio">${(prod.precio * 1.305).toFixed(2)}</h2>
                                 </div>
                             </div>
                         </Link>

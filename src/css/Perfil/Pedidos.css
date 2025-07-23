@@ -17,3 +17,7 @@
 .li-none{
     list-style: none;
 }
+.scroll-pedidos{
+        width: 100%;
+    overflow-x: auto;
+}

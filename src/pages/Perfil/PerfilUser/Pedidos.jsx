@@ -44,10 +44,10 @@ const Pedidos = () => {
     };
 
     return (
-        <div className=''>
+        <div className='scroll-pedidos'>
             <h1 className="titulo-tabla-usuario">Mis pedidos</h1>
             <div className="seccion-form">
-                <table className="tabla-pedidos">
+                <table className="tabla-pedidos " >
                     <thead>
                         <tr>
                             <th>#</th>

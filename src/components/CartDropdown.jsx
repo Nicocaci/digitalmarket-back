@@ -5,7 +5,7 @@ import CartItem from './CartItem';
 import { Link } from 'react-router-dom';
 
 const CartDropdown = ({ visible, onClose }) => {
-    const { cart, total, removeProductFromCart } = useCart();
+    const { cart, total, isMayorista, removeProductFromCart } = useCart();
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -33,6 +33,11 @@ const CartDropdown = ({ visible, onClose }) => {
                 </button>
             </div>
 
+            {isMayorista && (
+                <div className="mayorista-alert">
+                    🎉 ¡Se aplicó el precio mayorista por superar los 10kg!
+                </div>
+            )}
             {!cart || cart.length === 0 ? (
                 <p className="empty">El carrito está vacío</p>
             ) : (
@@ -42,12 +47,13 @@ const CartDropdown = ({ visible, onClose }) => {
                             <CartItem
                                 key={item._id}
                                 item={item}
+                                isMayorista={isMayorista}
                                 removeProductFromCart={removeProductFromCart}
                             />
                         ))}
                     </ul>
                     <div className="cart-total">
-                        <h4>Total: $ {(total * 1.305).toFixed(2)}</h4>
+                        <h4>Total: $ {(total).toFixed(2)}</h4>
                     </div>
                     <div className="checkout-btn-container">
                         <Link to="/checkOut">
