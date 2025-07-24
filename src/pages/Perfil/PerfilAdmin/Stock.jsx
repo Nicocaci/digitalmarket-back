@@ -41,40 +41,40 @@ const Stock = () => {
         });
     };
 
-const handleEliminar = async (id) => {
-    const resultado = await Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'Esta acción eliminará el producto de forma permanente.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Sí, eliminar',
-        cancelButtonText: 'Cancelar'
-    });
+    const handleEliminar = async (id) => {
+        const resultado = await Swal.fire({
+            title: '¿Estás seguro?',
+            text: 'Esta acción eliminará el producto de forma permanente.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        });
 
-    if (resultado.isConfirmed) {
-        try {
-            await axios.delete(`${apiUrl}/productos/${id}`);
-            await fetchProductos();
+        if (resultado.isConfirmed) {
+            try {
+                await axios.delete(`${apiUrl}/productos/${id}`);
+                await fetchProductos();
 
-            Swal.fire({
-                title: 'Eliminado',
-                text: 'El producto fue eliminado exitosamente.',
-                icon: 'success',
-                timer: 2000,
-                showConfirmButton: false
-            });
-        } catch (error) {
-            console.error("Error al eliminar el producto", error);
-            Swal.fire({
-                title: 'Error',
-                text: 'Hubo un problema al eliminar el producto.',
-                icon: 'error'
-            });
+                Swal.fire({
+                    title: 'Eliminado',
+                    text: 'El producto fue eliminado exitosamente.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+            } catch (error) {
+                console.error("Error al eliminar el producto", error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al eliminar el producto.',
+                    icon: 'error'
+                });
+            }
         }
-    }
-};
+    };
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -122,6 +122,7 @@ const handleEliminar = async (id) => {
                             <th>Imagen</th>
                             <th>Nombre</th>
                             <th>Categoria</th>
+                            <th>Peso</th>
                             <th>Precio</th>
                             <th>Nota</th>
                             <th>Acciones</th>
@@ -141,6 +142,7 @@ const handleEliminar = async (id) => {
                                     </td>
                                     <td>{prod.nombre}</td>
                                     <td>{prod.categoria}</td>
+                                    <td>{prod.peso} KG</td>
                                     <td>${prod.precio}</td>
                                     <td>{prod.descripcion}</td>
                                     <td>
@@ -162,6 +164,9 @@ const handleEliminar = async (id) => {
                         </label>
                         <label>Categoria:
                             <input className='input-stock' name="categoria" value={form.categoria} onChange={handleChange} />
+                        </label>
+                        <label>Peso Uni:
+                            <input className='input-stock' type="number" name="peso" value={form.peso} onChange={handleChange} />
                         </label>
                         <label>Precio:
                             <input className='input-stock' type="number" name="precio" value={form.precio} onChange={handleChange} />

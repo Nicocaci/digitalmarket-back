@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { motion } from 'framer-motion'; // ← importamos Framer Motion
+import { motion } from 'framer-motion';
 import '../css/Gracias.css';
-
 
 const Gracias = () => {
     const location = useLocation();
@@ -31,13 +30,22 @@ const Gracias = () => {
                 <div className="gracias-resumen">
                     <h3>Resumen del pedido</h3>
                     <ul>
-                        {orden.productos.map((item, index) => (
-                            <li key={index}>
-                                {item.nombre} x{item.quantity} - ${item.precio * item.quantity}
-                            </li>
-                        ))}
+                        {orden.productos.map((item, index) => {
+                            const pesoUnidad = item.peso; // ← solo funciona si este dato fue enviado en la orden
+                            const unidades = pesoUnidad
+                                ? Math.round(item.quantity / pesoUnidad)
+                                : item.quantity;
+                            const pesoTotal = (pesoUnidad * unidades).toFixed(2);
+                            const subtotal = (item.precio * item.quantity).toFixed(2);
+
+                            return (
+                                <li key={index}>
+                                    {item.nombre} - {unidades} unidad{unidades !== 1 ? 'es' : ''} ({pesoTotal} kg) - ${subtotal}
+                                </li>
+                            );
+                        })}
                     </ul>
-                    <h4 className='font-total'>Total: ${orden.total.toFixed(2)}</h4>
+                    <h4 className="font-total">Total: ${orden.total.toFixed(2)}</h4>
                 </div>
 
                 <button className="gracias-boton" onClick={() => navigate('/')}>

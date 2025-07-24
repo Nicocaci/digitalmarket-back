@@ -55,18 +55,25 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    const addProductToCart = async (productId, quantity = 1) => {
-        try {
-            await axios.post(`${apiUrl}/carrito/${cartId}/productos/${productId}`, { quantity }, { withCredentials: true });
-            const response = await axios.get(`${apiUrl}/carrito/${cartId}`, { withCredentials: true });
-            setCart(response.data.products);
-            toast.success("Producto agregado al carrito");
-        } catch (error) {
-            console.error("Error al agregar producto:", error);
-            toast.error("Error al agregar producto, debes iniciar sesión primero");
-        }
-    };
+const addProductToCart = async (producto, pesoTotal) => {
+    try {
+        await axios.post(
+            `${apiUrl}/carrito/${cartId}/productos/${producto._id}`,
+            { quantity: pesoTotal }, // sigue usando el campo "quantity", pero ahora son kilos
+            { withCredentials: true }
+        );
 
+        const response = await axios.get(`${apiUrl}/carrito/${cartId}`, {
+            withCredentials: true,
+        });
+
+        setCart(response.data.products);
+        toast.success("Producto agregado al carrito");
+    } catch (error) {
+        console.error("Error al agregar producto:", error);
+        toast.error("Error al agregar producto, debes iniciar sesión primero");
+    }
+};
     const removeProductFromCart = async (productId, quantity = 1) => {
         try {
             await axios.delete(`${apiUrl}/carrito/${cartId}/productos/${productId}`, {

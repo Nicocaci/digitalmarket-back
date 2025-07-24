@@ -27,8 +27,11 @@ const ItemDetail = () => {
 
     const handleAddToCart = (productId) => {
         const cantidad = cantidades[productId] || 1;
-        addProductToCart(productId, cantidad);
+        const pesoTotal = cantidad * producto.peso;
+
+        addProductToCart(producto, pesoTotal); // 👈 le pasás el producto y el peso total
     };
+
 
 
     const handleCantidadChange = (productId, value) => {
@@ -56,26 +59,30 @@ const ItemDetail = () => {
                     <div className='card-detail'>
                         <h2>{producto.nombre}</h2>
                         <p><strong>SKU:</strong> {producto._id}</p>
-                        <p><strong>Precio por KG:</strong> ${(producto.precio * 1.305).toFixed(2)}</p>
-                        <p><strong>Precio por KG MAYORISTA:</strong> ${(producto.precio * 1.205).toFixed(2)}</p>
                         <p><strong>Categoría:</strong> {producto.categoria}</p>
+                        <p><strong>Peso Unitario:</strong> {producto.peso} KG.</p>
+                        <p><strong>Precio por KG:</strong> ${(producto.precio * 1.305).toFixed(2)}</p>
+                        <p><strong>Precio por KG MAYORISTA*:</strong> ${(producto.precio * 1.205).toFixed(2)}</p>
                         <p><strong>Nota:</strong> {producto.descripcion}</p>
-                        <p className='cantidad'>Cantidad de KG</p>
+                        <p className='cantidad'><strong>Unidades</strong></p>
                         <div className="cantidad-container">
                             <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) - 1)}>-</button>
                             <span>{cantidades[producto._id] || 1}</span>
                             <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) + 1)}>+</button>
                         </div>
+                        <p>
+                            <strong>Subtotal:</strong> ${(producto.precio * 1.305 * (cantidades[producto._id] || 1) * producto.peso).toFixed(2)}
+                        </p>
 
                         <button onClick={() => handleAddToCart(producto._id, 1)}>Añadir al carrito</button>
                     </div>
                 </div>
             </div>
             <div className='info-mayorista'>
-                    <p><strong>*PRECIO MAYORISTA: UNA VEZ QUE EL CARRITO ALCANZA LOS 10KG DE CUALQUIER PRODUCTO, EMPIEZA A CALCULAR PRECIO MAYORISTA </strong></p>
+                <p><strong>*PRECIO MAYORISTA: UNA VEZ QUE EL CARRITO ALCANZA LOS 10KG DE CUALQUIER PRODUCTO, EMPIEZA A CALCULAR PRECIO MAYORISTA </strong></p>
             </div>
         </div>
-        
+
     );
 };
 

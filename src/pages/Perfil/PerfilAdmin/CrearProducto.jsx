@@ -11,6 +11,7 @@ const CrearProducto = () => {
         categoria: "",
         imagen: "",
         precio: "",
+        peso: "",
         descripcion: "",
     });
 
@@ -51,6 +52,7 @@ const CrearProducto = () => {
                     formDataToSend.append("imagen", file);
                 });
                 formDataToSend.append("precio", formData.precio);
+                formDataToSend.append("peso", formData.peso);
                 formDataToSend.append("descripcion", formData.descripcion);
 
                 try {
@@ -71,6 +73,7 @@ const CrearProducto = () => {
                         categoria: "",
                         imagen: "",
                         precio: "",
+                        peso: "",
                         descripcion: "",
                     });
                     setFileNames([]);
@@ -108,7 +111,7 @@ const CrearProducto = () => {
                     value={formData.categoria}
                     onChange={handleChange}
                     required />
-                
+
                 <input
                     type="text"
                     name='descripcion'
@@ -117,6 +120,13 @@ const CrearProducto = () => {
                     value={formData.descripcion}
                     onChange={handleChange}
                     required />
+                                    <input
+                    type="number"
+                    name="peso"
+                    className='input-crear'
+                    placeholder='Peso Unitario'
+                    value={formData.peso}
+                    onChange={handleChange} />
             </div>
             <div className='grid-productos'>
                 <input
@@ -126,6 +136,7 @@ const CrearProducto = () => {
                     placeholder='Precio $$'
                     value={formData.precio}
                     onChange={handleChange} />
+
 
                 {/* Botón personalizado para input file */}
                 <div>
