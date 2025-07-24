@@ -146,17 +146,17 @@
         margin-top: 50%;
     }
     .card-detalle{
-        width: 95%;
+        width: 100%;
     }
     .card-detail h2{
-        font-size: 15px;
+        font-size: 12px;
     }
     .img-detalle{
         height: 70%;
-        width: 150px;
+        width: 200px;
     }
     .card-detail p{
-        font-size: 12px;
+        font-size: 10px;
     }
     .info-mayorista{
         font-size: 0.8rem;

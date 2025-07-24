@@ -117,7 +117,13 @@ const Productos = () => {
                     {productosFiltrados.map((prod) => (
                         <Link key={prod._id} to={`/productos/${prod._id}`} className="card-link">
                             <div className="card card-productos">
-                                <img src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
+                                <img
+                                    src={`${apiUrlUD}/uploads/${prod.imagen?.[0]}`}
+                                    alt={prod.nombre}
+                                    onError={(e) => { e.target.src = '/placeholder.png'; }}
+                                />
+
+
                                 <div className="card-content">
                                     <h1>{prod.nombre}</h1>
                                 </div>
