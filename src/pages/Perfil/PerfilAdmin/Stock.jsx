@@ -124,7 +124,6 @@ const Stock = () => {
                             <th>Categoria</th>
                             <th>Peso</th>
                             <th>Precio</th>
-                            <th>Nota</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -144,7 +143,6 @@ const Stock = () => {
                                     <td>{prod.categoria}</td>
                                     <td>{prod.peso} KG</td>
                                     <td>${prod.precio}</td>
-                                    <td>{prod.descripcion}</td>
                                     <td>
                                         <button className='btn-stock' onClick={() => handleEditarClick(prod)}>Editar</button>
                                         <button className='btn-eliminar-stock' onClick={() => handleEliminar(prod._id)}>Eliminar</button>

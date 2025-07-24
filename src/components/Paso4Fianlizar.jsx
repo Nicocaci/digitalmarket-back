@@ -1,163 +1,158 @@
 import axios from 'axios';
 import { useCart } from '../context/CartContext.jsx';
 import { useNavigate } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
 
 const apiUrl = import.meta.env.VITE_API_URL;
-const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 
-const Paso4Finalizar = ({ formData, cart, total, prevStep }) => {
-  const { clearCart } = useCart();
+const Paso4Finalizar = ({ formData, total: totalProp, prevStep }) => {
+  const { clearCart, cart } = useCart();
   const navigate = useNavigate();
 
-  // Calcular el total de kilos en el carrito
   const totalKilos = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const esMayorista = totalKilos >= 10;
 
-  // Agregar recargo o descuento mayorista según el peso total
-  const cartConRecargo = cart.map(item => {
-    const precioBase = item.product.precio;
-    let precioFinal;
-
-    if (totalKilos >= 10) {
-      precioFinal = precioBase * 1.205; // Precio mayorista
-    } else {
-      precioFinal = precioBase * 1.305; // Precio normal con recargo
-    }
+  const productosFormateados = cart.map(item => {
+    const prod = item.product || item.producto || item;
+    const cantidad = item.quantity || item.cantidad || 0;
+    const precioBase = prod.precio || 0;
+    const peso = prod.peso || 1;
+    const precioFinal = precioBase;
 
     return {
-      ...item,
-      precioFinal,
-      subtotal: precioFinal * item.quantity
+      productId: prod._id || item._id || null,
+      nombre: prod.nombre || 'Sin nombre',
+      precio: precioFinal,
+      peso,
+      quantity: cantidad
     };
   });
 
-  const totalConRecargo = cartConRecargo.reduce((acc, item) => acc + item.subtotal, 0);
+  const totalCalculado = productosFormateados.reduce((acc, item) => {
+    const precioAjustado = esMayorista
+      ? item.precio * 1.205
+      : item.precio * 1.305;
+    return acc + precioAjustado * item.quantity;
+  }, 0);
 
-  const handleConfirmarCompra = async () => {
-    if (cart.length === 0) {
-      alert('Tu carrito está vacío.');
-      return;
-    }
-
+  const handleSubmit = async () => {
     try {
-      // Crear orden en el backend
-      await axios.post(`${apiUrl}/orders/crear-orden`, {
+      const ordenData = {
+        ...formData,
+        productos: productosFormateados,
+        total: totalCalculado,
+        metodoPago: 'efectivo',
+        estado: 'pendiente',
+        fecha: new Date(),
+      };
+
+      const res = await axios.post(`${apiUrl}/orders/crear-orden`, ordenData, {
+        withCredentials: true,
+      });
+
+      const nuevaOrden = res.data.orden;
+
+      const productosTexto = productosFormateados
+        .map(item => {
+          const unidades = Math.round(item.quantity / item.peso);
+          const precioAjustado = esMayorista
+            ? item.precio * 1.205
+            : item.precio * 1.305;
+          const subtotal = precioAjustado * item.quantity;
+          return `${item.nombre} x${unidades} unidad${unidades !== 1 ? 'es' : ''} (${item.quantity.toFixed(2)} kg) - $${subtotal.toFixed(2)}`;
+        })
+        .join('\n');
+
+      const emailParams = {
         nombre: formData.nombre,
         email: formData.email,
         telefono: formData.telefono,
         direccion: formData.direccion,
-        metodoPago: formData.metodoPago,
-        productos: cartConRecargo.map(item => ({
-          productId: item._id || item.product._id,
-          nombre: item.product.nombre,
-          precio: item.precioFinal,
-          peso: item.product.peso,
-          quantity: item.quantity
-        })),
-        total: totalConRecargo
-      }, {
-        withCredentials: true
-      });
+        metodoPago: 'Efectivo',
+        productos: productosTexto,
+        total: totalCalculado.toFixed(2),
+      };
 
-      // Si es pago por Mercado Pago
-      if (formData.metodoPago === 'mercado_pago') {
-        const mercadoPagoResponse = await axios.post(`${apiUrl}/mercado-pago/crear-orden`, {
-          productos: cartConRecargo.map(item => ({
-            nombre: item.product.nombre,
-            precio: item.precioFinal,
-            peso: item.product.peso,
-            quantity: item.quantity
-          })),
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono
-        });
+      // 📩 Enviar al cliente
+      await emailjs.send(
+        'service_owbp44t',
+        'template_2rj0flv',
+        emailParams,
+        'BOrfBHSq-UsH597J3'
+      );
 
-        window.location.href = mercadoPagoResponse.data.init_point;
-      } else {
-        // Pago en efectivo
-        const nuevaOrden = {
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono,
-          direccion: formData.direccion,
-          metodoPago: formData.metodoPago,
-          productos: cartConRecargo.map(item => ({
-            nombre: item.product.nombre,
-            precio: item.precioFinal,
-            peso: item.product.peso,
-            quantity: item.quantity
-          })),
-          total: totalConRecargo
-        };
+      // 📩 Enviar al admin (vos)
+      await emailjs.send(
+        'service_owbp44t',
+        'template_2rj0flv',
+        {
+          ...emailParams,
+          email: 'digitalmarketfn@gmail.com',
+          nombre: `🛎 Nuevo pedido de ${formData.nombre}`
+        },
+        'BOrfBHSq-UsH597J3'
+      );
 
-        clearCart();
-        navigate('/gracias', { state: { orden: nuevaOrden } });
-      }
+      clearCart();
+      navigate('/gracias', { state: { orden: nuevaOrden } });
+
     } catch (error) {
-      console.error('Error al finalizar la compra:', error);
-      alert('Ocurrió un error al procesar tu compra.');
+      console.error('❌ Error al finalizar compra:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Hubo un problema al finalizar la compra. Intentá de nuevo.'
+      });
     }
   };
 
   return (
-    <div className="checkout-form">
-      <h3>Resumen Final</h3>
-      <p><strong>Nombre:</strong> {formData.nombre}</p>
-      <p><strong>Email:</strong> {formData.email}</p>
-      <p><strong>Teléfono:</strong> {formData.telefono}</p>
-      <p><strong>Dirección:</strong> {formData.direccion}</p>
-      <p><strong>Método de Pago:</strong> {formData.metodoPago === 'mercado_pago' ? 'Mercado Pago' : 'Efectivo'}</p>
-      <p><strong>Total de Kilos:</strong> {totalKilos} kg</p>
+    <div className="paso paso4">
+      <h2>Revisá tu pedido</h2>
 
-      {totalKilos >= 10 && (
-        <p style={{ color: 'green', fontWeight: 'bold' }}>💰 Precio mayorista aplicado por superar los 10kg.</p>
-      )}
+      <div className="detalle-comprador">
+        <h3>Datos del comprador</h3>
+        <p><strong>Nombre:</strong> {formData.nombre}</p>
+        <p><strong>Email:</strong> {formData.email}</p>
+        <p><strong>Teléfono:</strong> {formData.telefono}</p>
+        <p><strong>Dirección:</strong> {formData.direccion}</p>
+        <p><strong>Localidad:</strong> {formData.localidad}, {formData.provincia}</p>
+        <p><strong>Código Postal:</strong> {formData.cp}</p>
+        <p><strong>Método de pago:</strong> Efectivo</p>
+      </div>
 
-      <ul className="li-none">
-        {cartConRecargo.map(item => {
-          const pesoUnidad = item.product.peso; // en kg
-          const unidades = pesoUnidad
-            ? Math.round(item.quantity / pesoUnidad)
-            : item.quantity;
-          const pesoTotal = (pesoUnidad * unidades).toFixed(2);
+      <div className="detalle-pedido">
+        <h3>Productos</h3>
+        <ul className="lista-productos">
+          {productosFormateados.map((item, i) => {
+            const unidades = Math.round(item.quantity / item.peso);
+            const precioAjustado = esMayorista
+              ? item.precio * 1.205
+              : item.precio * 1.305;
+            const subtotal = precioAjustado * item.quantity;
 
-          return (
-            <li
-              key={item._id}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: '10px'
-              }}
-            >
-              <img
-                src={`${apiUrlUD}/uploads/${item.product.imagen}`}
-                alt={item.product?.nombre}
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  objectFit: 'cover',
-                  marginRight: '10px',
-                  borderRadius: '8px'
-                }}
-              />
-              <span className='detalle-compra'>
-                {item.product.nombre} - {unidades} unidad{unidades !== 1 ? 'es' : ''} ({pesoTotal} kg) - ${item.subtotal.toFixed(2)}
-              </span>
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li key={i} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <div>
+                  <p style={{ margin: 0 }}>
+                    {item.nombre} x{unidades} unidad{unidades !== 1 ? 'es' : ''} ({item.quantity.toFixed(2)} kg)
+                  </p>
+                  <small>
+                    Precio por kg: ${precioAjustado.toFixed(2)} – Subtotal: <strong>${subtotal.toFixed(2)}</strong>
+                  </small>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
 
+        <h4>Total: ${totalCalculado.toFixed(2)}</h4>
+      </div>
 
-
-      <h4 className='font-total'>Total: ${totalConRecargo.toFixed(2)}</h4>
-
-      <div className="btn-checkout">
-        <button onClick={prevStep}>Atrás</button>
-        <button onClick={handleConfirmarCompra}>
-          Confirmar y {formData.metodoPago === 'mercado_pago' ? 'Pagar' : 'Finalizar'}
-        </button>
+      <div className="botones-finalizar">
+        <button onClick={prevStep}>Volver</button>
+        <button onClick={handleSubmit}>Confirmar Compra</button>
       </div>
     </div>
   );

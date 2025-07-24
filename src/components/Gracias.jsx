@@ -31,12 +31,17 @@ const Gracias = () => {
                     <h3>Resumen del pedido</h3>
                     <ul>
                         {orden.productos.map((item, index) => {
-                            const pesoUnidad = item.peso; // ← solo funciona si este dato fue enviado en la orden
-                            const unidades = pesoUnidad
-                                ? Math.round(item.quantity / pesoUnidad)
-                                : item.quantity;
-                            const pesoTotal = (pesoUnidad * unidades).toFixed(2);
-                            const subtotal = (item.precio * item.quantity).toFixed(2);
+                            const pesoUnitario = item.peso;
+                            const cantidadEnKg = item.quantity;
+                            const unidades = pesoUnitario > 0
+                                ? Math.round(cantidadEnKg / pesoUnitario)
+                                : 1;
+
+                            const pesoTotal = cantidadEnKg.toFixed(2); // peso total ya viene en quantity
+
+                            // Precio por kg: podés ajustar según lógica de mayorista si querés
+                            const precioPorKg = item.precio;
+                            const subtotal = (precioPorKg * cantidadEnKg);
 
                             return (
                                 <li key={index}>
@@ -45,6 +50,7 @@ const Gracias = () => {
                             );
                         })}
                     </ul>
+
                     <h4 className="font-total">Total: ${orden.total.toFixed(2)}</h4>
                 </div>
 

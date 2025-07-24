@@ -70,9 +70,12 @@ const ItemDetail = () => {
                             <span>{cantidades[producto._id] || 1}</span>
                             <button onClick={() => handleCantidadChange(producto._id, (cantidades[producto._id] || 1) + 1)}>+</button>
                         </div>
-                        <p>
-                            <strong>Subtotal:</strong> ${(producto.precio * 1.305 * (cantidades[producto._id] || 1) * producto.peso).toFixed(2)}
-                        </p>
+                        <div className='subtotal-container'>
+                            <strong>Subtotal:</strong>
+                            <span className='subtotal'>
+                                ${(producto.precio * 1.305 * (cantidades[producto._id] || 1) * producto.peso).toFixed(2)}
+                            </span>
+                        </div>
 
                         <button onClick={() => handleAddToCart(producto._id, 1)}>Añadir al carrito</button>
                     </div>
