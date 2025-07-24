@@ -130,7 +130,7 @@
 }
 
 .subtotal{
-    color: red !important;
+    color: #05820e !important;
     font-size:  1.2rem !important;
 }
 .subtotal-container{
@@ -161,6 +161,9 @@
     .info-mayorista{
         font-size: 0.8rem;
         padding: 10px;
+    }
+    .subtotal{
+        font-size: 1rem !important;
     }
 }
 
