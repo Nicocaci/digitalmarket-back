@@ -43,8 +43,8 @@
     background: white;
     padding: 20px;
     border-radius: 8px;
-    width: 400px;
     border: 1px solid #1c24a2;
+    margin-top: 10%;
 }
 
 .modal-content label {
@@ -156,8 +156,21 @@
     color: black;
     transition: 1s;
 }
+
+.img-preview{
+    height: 100px;
+}
 @media (max-width: 575px) {
     .seccion-productos {
         width: 100%;
+    }
+    .modal-content{
+        margin-top: 30%;
+    }
+    .modal-content label{
+        font-size: 10px;
+    }
+    .input-stock{
+        font-size: 10px;
     }
 }
