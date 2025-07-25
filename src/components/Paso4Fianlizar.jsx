@@ -75,24 +75,24 @@ const Paso4Finalizar = ({ formData, total: totalProp, prevStep }) => {
       };
 
       // 📩 Enviar al cliente
-      await emailjs.send(
-        'service_owbp44t',
-        'template_2rj0flv',
-        emailParams,
-        'BOrfBHSq-UsH597J3'
-      );
+    //  await emailjs.send(
+    //    'service_owbp44t',
+    //    'template_2rj0flv',
+    //    emailParams,
+    //    'BOrfBHSq-UsH597J3'
+    //  );
 
-      // 📩 Enviar al admin (vos)
-      await emailjs.send(
-        'service_owbp44t',
-        'template_2rj0flv',
-        {
-          ...emailParams,
-          email: 'digitalmarketfn@gmail.com',
-          nombre: `🛎 Nuevo pedido de ${formData.nombre}`
-        },
-        'BOrfBHSq-UsH597J3'
-      );
+    //  // 📩 Enviar al admin (vos)
+    //  await emailjs.send(
+    //    'service_owbp44t',
+    //    'template_2rj0flv',
+    //    {
+    //      ...emailParams,
+    //      email: 'digitalmarketfn@gmail.com',
+    //      nombre: `🛎 Nuevo pedido de ${formData.nombre}`
+    //    },
+    //    'BOrfBHSq-UsH597J3'
+    //  );
 
       clearCart();
       navigate('/gracias', { state: { orden: nuevaOrden } });
