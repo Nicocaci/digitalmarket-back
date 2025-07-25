@@ -9,7 +9,14 @@ const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
 const Stock = () => {
     const [productos, setProductos] = useState([]);
     const [productoEditando, setProductoEditando] = useState(null);
-    const [form, setForm] = useState({ nombre: '', categoria: '', precio: '', descripcion: '' });
+    const [form, setForm] = useState({
+        nombre: '',
+        categoria: '',
+        precio: '',
+        peso: '',
+        descripcion: '',
+        imagen: null
+    });
     const [filtroNombre, setFiltroNombre] = useState('');
     const [filtroCategoria, setFiltroCategoria] = useState('');
 
@@ -37,7 +44,9 @@ const Stock = () => {
             nombre: producto.nombre,
             categoria: producto.categoria,
             precio: producto.precio,
-            descripcion: producto.descripcion
+            peso: producto.peso,
+            descripcion: producto.descripcion,
+            imagen: null
         });
     };
 
@@ -57,7 +66,6 @@ const Stock = () => {
             try {
                 await axios.delete(`${apiUrl}/productos/${id}`);
                 await fetchProductos();
-
                 Swal.fire({
                     title: 'Eliminado',
                     text: 'El producto fue eliminado exitosamente.',
@@ -82,11 +90,25 @@ const Stock = () => {
 
     const handleGuardar = async () => {
         try {
-            await axios.put(`${apiUrl}/productos/${productoEditando}`, form);
+            const formData = new FormData();
+            formData.append('nombre', form.nombre);
+            formData.append('categoria', form.categoria);
+            formData.append('precio', form.precio);
+            formData.append('peso', form.peso);
+            formData.append('descripcion', form.descripcion);
+            if (form.imagen) {
+                formData.append('imagen', form.imagen);
+            }
+
+            await axios.put(`${apiUrl}/productos/${productoEditando}`, formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+
             setProductoEditando(null);
             await fetchProductos();
         } catch (error) {
             console.error("Error al actualizar el producto", error);
+            Swal.fire("Error", "No se pudo guardar el producto", "error");
         }
     };
 
@@ -171,6 +193,21 @@ const Stock = () => {
                         </label>
                         <label>Descripcion:
                             <input className='input-stock' name="descripcion" value={form.descripcion} onChange={handleChange} />
+                        </label>
+                        <label>Imagen actual:
+                            <img
+                                src={`${apiUrlUD}/uploads/${productos.find(p => p._id === productoEditando)?.imagen}`}
+                                alt="Imagen actual"
+                                className="img-preview"
+                            />
+                        </label>
+                        <label>Cambiar imagen:
+                            <input
+                                className='input-stock'
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => setForm({ ...form, imagen: e.target.files[0] })}
+                            />
                         </label>
                         <div className="modal-buttons">
                             <button className='btn-guardar-stock' onClick={handleGuardar}>Guardar</button>
