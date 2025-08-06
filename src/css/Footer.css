@@ -73,6 +73,17 @@
     color: black;
 }
 
+.footer-lin{
+    border-top: 2px solid #1c24a2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    font-size: 0.8rem;
+    margin: 0 350px 0 350px;
+}
+
 @media (max-width: 575px){
     .seccion-footer{
         display: flex;
@@ -98,4 +109,8 @@
     .footer-content a{
         font-size: 10px;
     }
+    .footer-lin{
+    margin: 0;
+    font-size: 0.6rem;
+}
 }

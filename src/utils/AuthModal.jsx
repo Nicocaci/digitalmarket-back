@@ -94,7 +94,7 @@ const AuthModal = ({ isOpen, onClose, type, setType }) => {
                   <input type="text" name="apellido" value={formData.apellido} onChange={handleChange} required />
                 </div>
                 <div className="form-group ">
-                  <label>DNI:</label>
+                  <label>DNI/CUIT:</label>
                   <input type="text" name="dni" value={formData.dni} onChange={handleChange} required />
                 </div>
                 <div className="form-group  ">

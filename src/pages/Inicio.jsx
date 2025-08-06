@@ -8,6 +8,27 @@ import { Link } from 'react-router-dom';
 
 
 const Inicio = () => {
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            },
+            {
+                threshold: 0.2, // se activa cuando el 20% del elemento es visible
+            }
+        );
+
+        const elements = document.querySelectorAll('.data-info');
+        elements.forEach((el) => observer.observe(el));
+
+        return () => {
+            elements.forEach((el) => observer.unobserve(el));
+        };
+    }, []);
 
 
 
@@ -31,7 +52,38 @@ const Inicio = () => {
                     <Link to={"/productos"}><button className="btn-inicio">Ver Productos</button></Link>
                 </div>
             </div>
-
+            <div className='data-container'>
+                <div className='data-info'>
+                    <div className='data-logo center'>
+                        <img src="/envioslogo.png" alt="envios" />
+                    </div>
+                    <div>
+                        <p>
+                            Envíos Express y SÍN CARGO!
+                        </p>
+                    </div>
+                </div>
+                <div className='data-info'>
+                    <div>
+                        <img src="/logopeso.png" alt="precios mayorista y minorista" />
+                    </div>
+                    <div>
+                        <p>
+                            Precios Mayorista y Minorista
+                        </p>
+                    </div>
+                </div>
+                <div className='data-info'>
+                    <div>
+                        <img src="/calidadlogo.png" alt="productos directo del frigorifico" />
+                    </div>
+                    <div>
+                        <p>
+                            Productos directo del frigorífico
+                        </p>
+                    </div>
+                </div>
+            </div>
 
             {/* <div className="hero-banner">
                 <BannerSlider />
@@ -39,6 +91,7 @@ const Inicio = () => {
             </div> */}
             <h1 className="title blur-in">Productos Destacados</h1>
             <ProductoDestacado />
+
         </section>
     )
 }
