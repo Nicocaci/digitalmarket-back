@@ -12,6 +12,8 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.14.0",
+    "ag-grid-community": "^34.1.1",
+    "ag-grid-react": "^34.1.1",
     "axios": "^1.9.0",
     "bootstrap-icons": "^1.13.1",
     "framer-motion": "^12.18.1",

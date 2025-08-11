@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import '../../../css/Perfil/Stock.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { AgGridReact } from 'ag-grid-react';
+import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+// Registrar módulos de AG Grid
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const apiUrlUD = import.meta.env.VITE_API_URL_UPLOADS;
@@ -27,12 +33,7 @@ const Stock = () => {
     const fetchProductos = async () => {
         try {
             const response = await axios.get(`${apiUrl}/productos`);
-            if (Array.isArray(response.data)) {
-                setProductos(response.data);
-            } else {
-                console.error("La API no devolvió un array", response.data);
-                setProductos([]);
-            }
+            setProductos(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error("Error al obtener los productos", error);
         }
@@ -75,11 +76,7 @@ const Stock = () => {
                 });
             } catch (error) {
                 console.error("Error al eliminar el producto", error);
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Hubo un problema al eliminar el producto.',
-                    icon: 'error'
-                });
+                Swal.fire("Error", "Hubo un problema al eliminar el producto.", "error");
             }
         }
     };
@@ -91,14 +88,9 @@ const Stock = () => {
     const handleGuardar = async () => {
         try {
             const formData = new FormData();
-            formData.append('nombre', form.nombre);
-            formData.append('categoria', form.categoria);
-            formData.append('precio', form.precio);
-            formData.append('peso', form.peso);
-            formData.append('descripcion', form.descripcion);
-            if (form.imagen) {
-                formData.append('imagen', form.imagen);
-            }
+            Object.entries(form).forEach(([key, value]) => {
+                if (value !== null) formData.append(key, value);
+            });
 
             await axios.put(`${apiUrl}/productos/${productoEditando}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
@@ -112,69 +104,87 @@ const Stock = () => {
         }
     };
 
-    const handleCancelar = () => {
-        setProductoEditando(null);
-    };
+    const handleCancelar = () => setProductoEditando(null);
+
+    const columnDefs = useMemo(() => [
+        { headerName: "#", valueGetter: "node.rowIndex + 1", width: 70 },
+        {
+            headerName: "Imagen",
+            field: "imagen",
+            cellRenderer: (params) => {
+                const imgSrc = params.value ? `${apiUrlUD}/uploads/${params.value}` : "/no-image.png";
+                return (
+                    <img
+                        src={imgSrc}
+                        alt="producto"
+                        style={{ width: 60, height: 60, objectFit: "cover", borderRadius: 5 }}
+                    />
+                );
+            },
+            width: 100
+        },
+        { headerName: "Nombre", field: "nombre", sortable: true, filter: true },
+        {
+            headerName: "Categoría",
+            valueGetter: (params) => params.data.categoria?.nombre || '',
+            sortable: true,
+            filter: true
+        },
+        { headerName: "Peso (KG)", field: "peso", sortable: true, width: 120 },
+        { headerName: "Precio", field: "precio", sortable: true, width: 120 },
+        {
+            headerName: "Acciones",
+            cellRenderer: (params) => (
+                <div style={{ display: 'flex', gap: '5px' }}>
+                    <button className='btn-stock' onClick={() => handleEditarClick(params.data)}>Editar</button>
+                    <button className='btn-eliminar-stock' onClick={() => handleEliminar(params.data._id)}>Eliminar</button>
+                </div>
+            ),
+            width: 200
+        }
+    ], [productos]);
+
+
+    const productosFiltrados = useMemo(() => {
+        return productos.filter((prod) =>
+            prod.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) &&
+            prod.categoria.toLowerCase().includes(filtroCategoria.toLowerCase())
+        );
+    }, [productos, filtroNombre, filtroCategoria]);
 
     return (
         <div className='seccion-productos'>
-            <div><h1 className='titulos-admin'>Productos a la Venta</h1></div>
-            <div className="tabla-productos">
-                <div className="filtros-stock">
-                    <input
-                        type="text"
-                        placeholder="Buscar por nombre..."
-                        className="input-filtro"
-                        value={filtroNombre}
-                        onChange={(e) => setFiltroNombre(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Buscar por categoría..."
-                        className="input-filtro"
-                        value={filtroCategoria}
-                        onChange={(e) => setFiltroCategoria(e.target.value)}
-                    />
-                </div>
+            <h1 className='titulos-admin'>Productos a la Venta</h1>
 
-                <table className='tabla-compras'>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Imagen</th>
-                            <th>Nombre</th>
-                            <th>Categoria</th>
-                            <th>Peso</th>
-                            <th>Precio</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {productos
-                            .filter((prod) =>
-                                prod.nombre.toLowerCase().includes(filtroNombre.toLowerCase()) &&
-                                prod.categoria.toLowerCase().includes(filtroCategoria.toLowerCase())
-                            )
-                            .map((prod, index) => (
-                                <tr key={prod._id}>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        <img className='img-productos' src={`${apiUrlUD}/uploads/${prod.imagen}`} alt={prod.nombre} />
-                                    </td>
-                                    <td>{prod.nombre}</td>
-                                    <td>{prod.categoria}</td>
-                                    <td>{prod.peso} KG</td>
-                                    <td>${prod.precio}</td>
-                                    <td>
-                                        <button className='btn-stock' onClick={() => handleEditarClick(prod)}>Editar</button>
-                                        <button className='btn-eliminar-stock' onClick={() => handleEliminar(prod._id)}>Eliminar</button>
-                                    </td>
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
+            <div className="filtros-stock">
+                <input
+                    type="text"
+                    placeholder="Buscar por nombre..."
+                    className="input-filtro"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por categoría..."
+                    className="input-filtro"
+                    value={filtroCategoria}
+                    onChange={(e) => setFiltroCategoria(e.target.value)}
+                />
             </div>
 
+            {/* Tabla AG Grid */}
+            <div className="ag-theme-alpine" style={{ height: 500, width: '100%' }}>
+                <AgGridReact
+                    rowData={productosFiltrados}
+                    columnDefs={columnDefs}
+                    pagination={true}
+                    paginationPageSize={10}
+                    paginationPageSizeSelector={false}
+                />
+            </div>
+
+            {/* Modal de edición */}
             {productoEditando && (
                 <div className="modal-editar">
                     <div className="modal-content">
@@ -182,7 +192,7 @@ const Stock = () => {
                         <label>Nombre:
                             <input className='input-stock' name="nombre" value={form.nombre} onChange={handleChange} />
                         </label>
-                        <label>Categoria:
+                        <label>Categoría:
                             <input className='input-stock' name="categoria" value={form.categoria} onChange={handleChange} />
                         </label>
                         <label>Peso Uni:
@@ -191,7 +201,7 @@ const Stock = () => {
                         <label>Precio:
                             <input className='input-stock' type="number" name="precio" value={form.precio} onChange={handleChange} />
                         </label>
-                        <label>Descripcion:
+                        <label>Descripción:
                             <input className='input-stock' name="descripcion" value={form.descripcion} onChange={handleChange} />
                         </label>
                         <label>Imagen actual:
