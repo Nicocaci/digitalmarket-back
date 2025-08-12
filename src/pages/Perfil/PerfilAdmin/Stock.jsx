@@ -174,7 +174,7 @@ const Stock = () => {
             </div>
 
             {/* Tabla AG Grid */}
-            <div className="ag-theme-alpine" style={{ height: 500, width: '100%' }}>
+            <div className="ag-theme-alpine" style={{ height: 350, width: '100%' }}>
                 <AgGridReact
                     rowData={productosFiltrados}
                     columnDefs={columnDefs}

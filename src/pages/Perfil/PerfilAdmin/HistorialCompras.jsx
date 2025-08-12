@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import '../../../css/Perfil/HistorialCompras.css';
 import axios from 'axios';
+import { AgGridReact } from 'ag-grid-react';
+import { ModuleRegistry, AllCommunityModule } from 'ag-grid-community';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+// Registrar módulos de AG Grid
+ModuleRegistry.registerModules([AllCommunityModule]);
+
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const HistorialCompras = () => {
     const [ordenes, setOrdenes] = useState([]);
-    const [ordenActiva, setOrdenActiva] = useState(null);
     const [filtroNombre, setFiltroNombre] = useState('');
     const [filtroEmail, setFiltroEmail] = useState('');
     const [filtroEstado, setFiltroEstado] = useState('');
+
+    // Estado para modal detalle
+    const [modalDetalle, setModalDetalle] = useState({ productos: null, isMayorista: false });
+
 
     useEffect(() => {
         axios.get(`${apiUrl}/orders/todas`)
@@ -16,139 +26,119 @@ const HistorialCompras = () => {
             .catch(err => console.error('Error al obtener las órdenes:', err));
     }, []);
 
-    const toggleDetalles = (id) => {
-        setOrdenActiva(prev => (prev === id ? null : id));
-    };
+    const ordenesFiltradas = useMemo(() => {
+        return ordenes.filter((orden) => {
+            const nombreMatch = orden.nombre.toLowerCase().includes(filtroNombre.toLowerCase());
+            const emailMatch = orden.email.toLowerCase().includes(filtroEmail.toLowerCase());
+            const estadoMatch = orden.estado.toLowerCase().includes(filtroEstado.toLowerCase());
+            return nombreMatch && emailMatch && estadoMatch;
+        });
+    }, [ordenes, filtroNombre, filtroEmail, filtroEstado]);
 
-    const ordenesFiltradas = ordenes.filter((orden) => {
-        const nombreMatch = orden.nombre.toLowerCase().includes(filtroNombre.toLowerCase());
-        const emailMatch = orden.email.toLowerCase().includes(filtroEmail.toLowerCase());
-        const estadoMatch = orden.estado.toLowerCase().includes(filtroEstado.toLowerCase());
-        return nombreMatch && emailMatch && estadoMatch;
-    });
+    const columnDefs = useMemo(() => [
+        { headerName: "#", valueGetter: "node.rowIndex + 1", width: 70 },
+        { headerName: "Cliente", field: "nombre", sortable: true, filter: true },
+        { headerName: "Email", field: "email", sortable: true, filter: true },
+        { headerName: "Teléfono", field: "telefono", sortable: true },
+        { headerName: "Dirección", field: "direccion", sortable: true },
+        { headerName: "Fecha", valueGetter: params => new Date(params.data.fecha).toLocaleDateString(), sortable: true },
+        { headerName: "Total", valueGetter: params => `$${params.data.total.toFixed(2)}`, sortable: true },
+        { headerName: "Estado", field: "estado", sortable: true, filter: true },
+        { headerName: "Productos", valueGetter: params => params.data.productos.length },
+        {
+            headerName: "Detalle",
+            cellRenderer: (params) => {
+                return (
+                    <div style={{ textAlign: "center" }}>
+                        <button
+                            className="btn-detalle"
+                            onClick={() => {
+                                const totalKg = params.data.productos.reduce((acc, p) => acc + p.quantity, 0);
+                                setModalDetalle({ productos: params.data.productos, isMayorista: totalKg >= 10 });
+                            }}
+                        >
+                            Ver detalle
+                        </button>
+                    </div>
+                );
+            }
+        }
+    ], []);
 
     return (
         <div className="historial-container">
             <h2 className="titulos-admin">Historial de Compras</h2>
-            <div className='scroll'>
-                <div className="filtros-ordenes">
-                    <input
-                        type="text"
-                        placeholder="Buscar por nombre"
-                        className="input-busqueda-ordenes"
-                        value={filtroNombre}
-                        onChange={(e) => setFiltroNombre(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Buscar por email"
-                        className="input-busqueda-ordenes"
-                        value={filtroEmail}
-                        onChange={(e) => setFiltroEmail(e.target.value)}
-                    />
-                    <input
-                        type="text"
-                        placeholder="Buscar por estado"
-                        className="input-busqueda-ordenes"
-                        value={filtroEstado}
-                        onChange={(e) => setFiltroEstado(e.target.value)}
-                    />
-                </div>
 
-                <table className="tabla-compras">
-                    <thead>
-                        <tr className='titulo-tablas'>
-                            <th>#</th>
-                            <th>Cliente</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                            <th>Dirección</th>
-                            <th>Fecha</th>
-                            <th>Total</th>
-                            <th>Estado</th>
-                            <th>Productos</th>
-                            <th>Detalle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {ordenesFiltradas.map((orden, index) => {
-                            const totalKgOrden = orden.productos.reduce((acc, p) => acc + p.quantity, 0);
-                            const isMayorista = totalKgOrden >= 10;
-
-                            return (
-                                <React.Fragment key={orden._id}>
-                                    <tr className='tabla-titulos'>
-                                        <td>{index + 1}</td>
-                                        <td>{orden.nombre}</td>
-                                        <td>{orden.email}</td>
-                                        <td>{orden.telefono || '-'}</td>
-                                        <td>{orden.direccion}</td>
-                                        <td>{new Date(orden.fecha).toLocaleDateString()}</td>
-                                        <td>${orden.total.toFixed(2)}</td>
-                                        <td>{orden.estado}</td>
-                                        <td>{orden.productos.length}</td>
-                                        <td>
-                                            <button className="btn-detalle" onClick={() => toggleDetalles(orden._id)}>
-                                                {ordenActiva === orden._id ? 'Ocultar' : 'Ver detalle'}
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    {ordenActiva === orden._id && (
-                                        <tr className="fila-detalle">
-                                            <td colSpan="10">
-                                                <table className="subtabla">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Producto</th>
-                                                            <th>Precio</th>
-                                                            <th>Cantidad</th>
-                                                            <th>Subtotal</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        {orden.productos.map((prod, idx) => {
-                                                            console.log('producto:', prod.nombre, 'quantity:', prod.quantity, 'peso:', prod.peso);
-
-                                                            const cantidadValida = typeof prod.quantity === 'number' && !isNaN(prod.quantity);
-                                                            const pesoValido = typeof prod.peso === 'number' && !isNaN(prod.peso) && prod.peso !== 0;
-
-                                                            const unidades = cantidadValida && pesoValido
-                                                                ? Math.ceil(prod.quantity / prod.peso)
-                                                                : 0;
-
-                                                            const precioFinal = prod.precio; // ya viene con el recargo aplicado
-                                                            const subtotal = precioFinal * prod.quantity;
-                                                            
-
-                                                            return (
-                                                                <tr key={idx}>
-                                                                    <td>{prod.nombre}</td>
-                                                                    <td>
-                                                                        ${precioFinal.toFixed(2)} ({isMayorista ? 'Mayorista' : 'Minorista'})
-                                                                    </td>
-                                                                    <td>
-                                                                        {unidades} unidad{unidades !== 1 ? 'es' : ''} ({cantidadValida ? prod.quantity.toFixed(2) : '0'} kg)
-                                                                    </td>
-                                                                    <td>${subtotal.toFixed(2)}</td>
-                                                                </tr>
-                                                            );
-                                                        })}
-
-
-
-
-
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    )}
-                                </React.Fragment>
-                            );
-                        })}
-                    </tbody>
-                </table>
+            {/* Filtros */}
+            <div className="filtros-ordenes">
+                <input
+                    type="text"
+                    placeholder="Buscar por nombre"
+                    className="input-busqueda-ordenes"
+                    value={filtroNombre}
+                    onChange={(e) => setFiltroNombre(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por email"
+                    className="input-busqueda-ordenes"
+                    value={filtroEmail}
+                    onChange={(e) => setFiltroEmail(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Buscar por estado"
+                    className="input-busqueda-ordenes"
+                    value={filtroEstado}
+                    onChange={(e) => setFiltroEstado(e.target.value)}
+                />
             </div>
+
+            {/* Tabla AG Grid */}
+            <div className="ag-theme-alpine" style={{ height: 350, width: '100%', maxWidth: '100%', overflowX: 'auto', boxSizing: 'border-box' }}>
+                <AgGridReact
+                    rowData={ordenesFiltradas}
+                    columnDefs={columnDefs}
+                    pagination={true}
+                    paginationPageSize={10}
+                    paginationPageSizeSelector={false}
+                />
+            </div>
+
+            {/* Modal detalle productos */}
+            {modalDetalle.productos && (
+                <div className="modal-fondo" onClick={() => setModalDetalle({ productos: null, isMayorista: false })}>
+                    <div className="modal-contenido" onClick={e => e.stopPropagation()}>
+                        <h3>Detalle de productos</h3>
+                        <table className="subtabla" style={{ width: '100%' }}>
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad (kg)</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {modalDetalle.productos.map((prod, idx) => {
+                                    const subtotal = prod.precio * prod.quantity;
+                                    return (
+                                        <tr key={idx}>
+                                            <td>{prod.nombre}</td>
+                                            <td>
+                                                ${prod.precio.toFixed(2)} ({modalDetalle.isMayorista ? 'Mayorista' : 'Minorista'})
+                                            </td>
+                                            <td>{prod.quantity.toFixed(2)}</td>
+                                            <td>${subtotal.toFixed(2)}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                        <button className="btn-cerrar" onClick={() => setModalDetalle({ productos: null, isMayorista: false })}>Cerrar</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -1,12 +1,11 @@
 .seccion-usuarios {
     padding: 20px;
-    border: 1px solid #ddd;
-    width: 50%;
-    height: 100%;
+    border: 1px solid blue;
+    width: 45%;
+    height: 500px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    margin-bottom: 20%;
 }
 
 .scroll{
@@ -29,5 +28,8 @@ grid-template-columns: repeat(2, 1fr);
 @media (max-width: 575px) {
     .seccion-usuarios {
         width: 100%;
+    }
+    .input-filtro{
+        min-width: 100px;
     }
 }

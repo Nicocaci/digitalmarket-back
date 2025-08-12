@@ -1,5 +1,6 @@
 .seccion-productos {
-    width: 50%;
+    width: 45%;
+    height: 500px;
     padding: 20px;
     background: #ffffff;
     border: 1px solid #1c24a2;
@@ -163,6 +164,7 @@
 @media (max-width: 575px) {
     .seccion-productos {
         width: 100%;
+        height: auto;
     }
     .modal-content{
         margin-top: 30%;
